@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Badge } from '../atoms/Badge';
-import { Button } from '../atoms/Button';
+import { Button } from '../ui/button';
 
 interface Column {
   key: string;
@@ -126,10 +126,10 @@ export const Table: React.FC<TableProps> = ({
       if (columnKey === 'actions') {
         return (
           <div style={{ display: 'flex', gap: '8px' }}>
-            <Button size="sm" variant="primary" onClick={() => onEdit?.(row)}>
+            <Button size="sm" variant="default" onClick={() => onEdit?.(row)}>
               수정
             </Button>
-            <Button size="sm" variant="danger" onClick={() => onDelete?.(row.id)}>
+            <Button size="sm" variant="destructive" onClick={() => onDelete?.(row.id)}>
               삭제
             </Button>
           </div>
@@ -155,7 +155,7 @@ export const Table: React.FC<TableProps> = ({
       if (columnKey === 'actions') {
         return (
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <Button size="sm" variant="primary" onClick={() => onEdit?.(row)}>
+            <Button size="sm" variant="default" onClick={() => onEdit?.(row)}>
               수정
             </Button>
             {row.status === 'draft' && (
@@ -179,13 +179,13 @@ export const Table: React.FC<TableProps> = ({
             {row.status === 'archived' && (
               <Button
                 size="sm"
-                variant="primary"
+                variant="default"
                 onClick={() => onRestore?.(row.id)}
               >
                 복원
               </Button>
             )}
-            <Button size="sm" variant="danger" onClick={() => onDelete?.(row.id)}>
+            <Button size="sm" variant="destructive" onClick={() => onDelete?.(row.id)}>
               삭제
             </Button>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Badge } from '../components/atoms';
+import { Badge } from '../components/atoms';
+import { Button } from '../components/ui/button';
 import { Alert, Table, Modal } from '../components/organisms';
 import { FormInput, FormSelect, FormTextarea } from '../components/molecules';
 import { userService } from '../services/userService';
@@ -283,7 +284,7 @@ export const ManagementPage: React.FC = () => {
 
           <div>
             <div style={{ marginBottom: '15px', textAlign: 'right' }}>
-              <Button variant="primary" size="md" onClick={() => setIsCreateModalOpen(true)}>
+              <Button variant="default" size="md" onClick={() => setIsCreateModalOpen(true)}>
                 새로 만들기
               </Button>
             </div>
@@ -405,7 +406,7 @@ export const ManagementPage: React.FC = () => {
               }}>
                 취소
               </Button>
-              <Button variant="primary" size="md" onClick={handleCreate}>
+              <Button variant="default" size="md" onClick={handleCreate}>
                 생성
               </Button>
             </>
@@ -530,7 +531,7 @@ export const ManagementPage: React.FC = () => {
               }}>
                 취소
               </Button>
-              <Button variant="primary" size="md" onClick={handleUpdate}>
+              <Button variant="default" size="md" onClick={handleUpdate}>
                 수정 완료
               </Button>
             </>
