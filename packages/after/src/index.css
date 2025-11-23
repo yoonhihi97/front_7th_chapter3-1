@@ -1,9 +1,13 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Typography */
+  --font-sans: Arial, sans-serif;
+
+  /* Border radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -18,18 +22,26 @@
   /* Action colors */
   --color-action-primary: var(--action-primary);
   --color-action-primary-foreground: var(--action-primary-foreground);
+  --color-action-primary-border: var(--action-primary-border);
+  --color-action-primary-hover: var(--action-primary-hover);
   --color-action-secondary: var(--action-secondary);
   --color-action-secondary-foreground: var(--action-secondary-foreground);
+  --color-action-secondary-border: var(--action-secondary-border);
+  --color-action-secondary-hover: var(--action-secondary-hover);
 
   /* Feedback colors */
   --color-feedback-success: var(--feedback-success);
   --color-feedback-success-foreground: var(--feedback-success-foreground);
+  --color-feedback-success-border: var(--feedback-success-border);
+  --color-feedback-success-hover: var(--feedback-success-hover);
   --color-feedback-warning: var(--feedback-warning);
   --color-feedback-warning-foreground: var(--feedback-warning-foreground);
   --color-feedback-info: var(--feedback-info);
   --color-feedback-info-foreground: var(--feedback-info-foreground);
   --color-feedback-error: var(--feedback-error);
   --color-feedback-error-foreground: var(--feedback-error-foreground);
+  --color-feedback-error-border: var(--feedback-error-border);
+  --color-feedback-error-hover: var(--feedback-error-hover);
 
   /* State colors */
   --color-state-muted: var(--state-muted);
@@ -46,68 +58,84 @@
   --radius: 0.1875rem; /* 3px - Material Design 기본값 */
 
   /* Surface colors */
-  --background: oklch(1 0 0); /* #ffffff */
-  --foreground: oklch(0.145 0 0); /* #333 */
-  --surface-card: oklch(1 0 0); /* #ffffff */
-  --surface-card-foreground: oklch(0.145 0 0);
+  --background: #ffffff;
+  --foreground: #333;
+  --surface-card: #ffffff;
+  --surface-card-foreground: #333;
 
   /* Action colors - 사용자 액션을 유도하는 색상 */
-  --action-primary: oklch(0.545 0.146 251.5); /* #1976d2 Material Blue */
-  --action-primary-foreground: oklch(1 0 0);
-  --action-secondary: oklch(0.97 0 0); /* #f5f5f5 Light Gray */
-  --action-secondary-foreground: oklch(0.145 0 0);
+  --action-primary: #1976d2;
+  --action-primary-foreground: #fff;
+  --action-primary-border: #1565c0;
+  --action-primary-hover: #1565c0;
+  --action-secondary: #f5f5f5;
+  --action-secondary-foreground: #333;
+  --action-secondary-border: #ddd;
+  --action-secondary-hover: #e0e0e0;
 
   /* Feedback colors - 시스템 피드백 색상 */
-  --feedback-success: oklch(0.535 0.154 142); /* #388e3c Green */
-  --feedback-success-foreground: oklch(1 0 0);
-  --feedback-warning: oklch(0.665 0.177 55); /* #f57c00 Orange */
-  --feedback-warning-foreground: oklch(1 0 0);
-  --feedback-info: oklch(0.565 0.142 233); /* #0288d1 Light Blue */
-  --feedback-info-foreground: oklch(1 0 0);
-  --feedback-error: oklch(0.577 0.245 27.325); /* #d32f2f Red */
-  --feedback-error-foreground: oklch(1 0 0);
+  --feedback-success: #388e3c;
+  --feedback-success-foreground: #fff;
+  --feedback-success-border: #2e7d32;
+  --feedback-success-hover: #2e7d32;
+  --feedback-warning: #f57c00;
+  --feedback-warning-foreground: #fff;
+  --feedback-info: #0288d1;
+  --feedback-info-foreground: #fff;
+  --feedback-error: #d32f2f;
+  --feedback-error-foreground: #fff;
+  --feedback-error-border: #c62828;
+  --feedback-error-hover: #c62828;
 
   /* State colors - UI 상태 표시 */
-  --state-muted: oklch(0.97 0 0); /* #f5f5f5 */
-  --state-muted-foreground: oklch(0.556 0 0); /* #666 */
+  --state-muted: #f5f5f5;
+  --state-muted-foreground: #666;
 
   /* Border colors */
-  --border-default: oklch(0.85 0 0); /* #ccc */
-  --border-input: oklch(0.85 0 0); /* #ccc */
-  --border-focus: oklch(0.545 0.146 251.5); /* primary color */
+  --border-default: #ccc;
+  --border-input: #ccc;
+  --border-focus: #1976d2;
 }
 
 .dark {
   /* Surface colors */
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --surface-card: oklch(0.205 0 0);
-  --surface-card-foreground: oklch(0.985 0 0);
+  --background: #212121;
+  --foreground: #fafafa;
+  --surface-card: #2e2e2e;
+  --surface-card-foreground: #fafafa;
 
   /* Action colors */
-  --action-primary: oklch(0.645 0.146 251.5);
-  --action-primary-foreground: oklch(0.145 0 0);
-  --action-secondary: oklch(0.269 0 0);
-  --action-secondary-foreground: oklch(0.985 0 0);
+  --action-primary: #42a5f5;
+  --action-primary-foreground: #212121;
+  --action-primary-border: #1e88e5;
+  --action-primary-hover: #1e88e5;
+  --action-secondary: #424242;
+  --action-secondary-foreground: #fafafa;
+  --action-secondary-border: #616161;
+  --action-secondary-hover: #616161;
 
   /* Feedback colors */
-  --feedback-success: oklch(0.635 0.154 142);
-  --feedback-success-foreground: oklch(0.145 0 0);
-  --feedback-warning: oklch(0.765 0.177 55);
-  --feedback-warning-foreground: oklch(0.145 0 0);
-  --feedback-info: oklch(0.665 0.142 233);
-  --feedback-info-foreground: oklch(0.145 0 0);
-  --feedback-error: oklch(0.704 0.191 22.216);
-  --feedback-error-foreground: oklch(0.985 0 0);
+  --feedback-success: #66bb6a;
+  --feedback-success-foreground: #212121;
+  --feedback-success-border: #43a047;
+  --feedback-success-hover: #43a047;
+  --feedback-warning: #ffa726;
+  --feedback-warning-foreground: #212121;
+  --feedback-info: #29b6f6;
+  --feedback-info-foreground: #212121;
+  --feedback-error: #ef5350;
+  --feedback-error-foreground: #fafafa;
+  --feedback-error-border: #e53935;
+  --feedback-error-hover: #e53935;
 
   /* State colors */
-  --state-muted: oklch(0.269 0 0);
-  --state-muted-foreground: oklch(0.708 0 0);
+  --state-muted: #424242;
+  --state-muted-foreground: #bdbdbd;
 
   /* Border colors */
-  --border-default: oklch(1 0 0 / 10%);
-  --border-input: oklch(1 0 0 / 15%);
-  --border-focus: oklch(0.645 0.146 251.5);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-input: rgba(255, 255, 255, 0.15);
+  --border-focus: #42a5f5;
 }
 
 @layer base {
