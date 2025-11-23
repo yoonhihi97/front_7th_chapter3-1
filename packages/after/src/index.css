@@ -55,6 +55,10 @@
   --color-feedback-error-border: var(--feedback-error-border);
   --color-feedback-error-hover: var(--feedback-error-hover);
 
+  /* Badge colors */
+  --color-badge-secondary: var(--badge-secondary);
+  --color-badge-secondary-foreground: var(--badge-secondary-foreground);
+
   /* State colors */
   --color-state-muted: var(--state-muted);
   --color-state-muted-foreground: var(--state-muted-foreground);
@@ -84,6 +88,10 @@
   --action-secondary-foreground: #333;
   --action-secondary-border: #ddd;
   --action-secondary-hover: #e0e0e0;
+
+  /* Badge colors */
+  --badge-secondary: #757575;
+  --badge-secondary-foreground: #fff;
 
   /* Feedback colors - 시스템 피드백 색상 */
   --feedback-success: #388e3c;
