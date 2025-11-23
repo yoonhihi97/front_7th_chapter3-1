@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../components/ui';
 import { Alert, Table, Modal } from '../components/organisms';
-import { FormInput, FormSelect, FormTextarea } from '../components/molecules';
+import { FormSelect, FormTextarea } from '../components/molecules';
+import { Input, Label, FormField } from '../components/ui';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
@@ -71,9 +72,7 @@ export const ManagementPage: React.FC = () => {
       await loadData();
       setIsCreateModalOpen(false);
       setFormData({});
-      setAlertMessage(
-        `${entityType === 'user' ? '사용자' : '게시글'}가 생성되었습니다`
-      );
+      setAlertMessage(`${entityType === 'user' ? '사용자' : '게시글'}가 생성되었습니다`);
       setShowSuccessAlert(true);
     } catch (error: any) {
       setErrorMessage(error.message || '생성에 실패했습니다');
@@ -120,9 +119,7 @@ export const ManagementPage: React.FC = () => {
       setIsEditModalOpen(false);
       setFormData({});
       setSelectedItem(null);
-      setAlertMessage(
-        `${entityType === 'user' ? '사용자' : '게시글'}가 수정되었습니다`
-      );
+      setAlertMessage(`${entityType === 'user' ? '사용자' : '게시글'}가 수정되었습니다`);
       setShowSuccessAlert(true);
     } catch (error: any) {
       setErrorMessage(error.message || '수정에 실패했습니다');
@@ -149,10 +146,7 @@ export const ManagementPage: React.FC = () => {
     }
   };
 
-  const handleStatusAction = async (
-    id: number,
-    action: 'publish' | 'archive' | 'restore'
-  ) => {
+  const handleStatusAction = async (id: number, action: 'publish' | 'archive' | 'restore') => {
     if (entityType !== 'post') return;
 
     try {
@@ -165,8 +159,7 @@ export const ManagementPage: React.FC = () => {
       }
 
       await loadData();
-      const message =
-        action === 'publish' ? '게시' : action === 'archive' ? '보관' : '복원';
+      const message = action === 'publish' ? '게시' : action === 'archive' ? '보관' : '복원';
       setAlertMessage(`${message}되었습니다`);
       setShowSuccessAlert(true);
     } catch (error: any) {
@@ -272,9 +265,7 @@ export const ManagementPage: React.FC = () => {
           >
             관리 시스템
           </h1>
-          <p style={{ color: '#666', fontSize: '14px' }}>
-            사용자와 게시글을 관리하세요
-          </p>
+          <p style={{ color: '#666', fontSize: '14px' }}>사용자와 게시글을 관리하세요</p>
         </div>
 
         <div
@@ -326,22 +317,14 @@ export const ManagementPage: React.FC = () => {
 
           <div>
             <div style={{ marginBottom: '15px', textAlign: 'right' }}>
-              <Button
-                variant="default"
-                size="md"
-                onClick={() => setIsCreateModalOpen(true)}
-              >
+              <Button variant="default" size="md" onClick={() => setIsCreateModalOpen(true)}>
                 새로 만들기
               </Button>
             </div>
 
             {showSuccessAlert && (
               <div style={{ marginBottom: '10px' }}>
-                <Alert
-                  variant="success"
-                  title="성공"
-                  onClose={() => setShowSuccessAlert(false)}
-                >
+                <Alert variant="success" title="성공" onClose={() => setShowSuccessAlert(false)}>
                   {alertMessage}
                 </Alert>
               </div>
@@ -349,11 +332,7 @@ export const ManagementPage: React.FC = () => {
 
             {showErrorAlert && (
               <div style={{ marginBottom: '10px' }}>
-                <Alert
-                  variant="error"
-                  title="오류"
-                  onClose={() => setShowErrorAlert(false)}
-                >
+                <Alert variant="error" title="오류" onClose={() => setShowErrorAlert(false)}>
                   {errorMessage}
                 </Alert>
               </div>
@@ -559,32 +538,34 @@ export const ManagementPage: React.FC = () => {
           </>
         }
       >
-        <div>
+        <div className="space-y-4">
           {entityType === 'user' ? (
             <>
-              <FormInput
-                name="username"
-                value={formData.username || ''}
-                onChange={(value) =>
-                  setFormData({ ...formData, username: value })
-                }
-                label="사용자명"
-                placeholder="사용자명을 입력하세요"
-                required
-                width="full"
-                fieldType="username"
-              />
-              <FormInput
-                name="email"
-                value={formData.email || ''}
-                onChange={(value) => setFormData({ ...formData, email: value })}
-                label="이메일"
-                placeholder="이메일을 입력하세요"
-                type="email"
-                required
-                width="full"
-                fieldType="email"
-              />
+              <FormField>
+                <Label htmlFor="username">
+                  사용자명 <span className="text-feedback-error">*</span>
+                </Label>
+                <Input
+                  id="username"
+                  name="username"
+                  value={formData.username || ''}
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  placeholder="사용자명을 입력하세요"
+                />
+              </FormField>
+              <FormField>
+                <Label htmlFor="email">
+                  이메일 <span className="text-feedback-error">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="이메일을 입력하세요"
+                />
+              </FormField>
               <div
                 style={{
                   display: 'grid',
@@ -595,9 +576,7 @@ export const ManagementPage: React.FC = () => {
                 <FormSelect
                   name="role"
                   value={formData.role || 'user'}
-                  onChange={(value) =>
-                    setFormData({ ...formData, role: value })
-                  }
+                  onChange={(value) => setFormData({ ...formData, role: value })}
                   options={[
                     { value: 'user', label: '사용자' },
                     { value: 'moderator', label: '운영자' },
@@ -609,9 +588,7 @@ export const ManagementPage: React.FC = () => {
                 <FormSelect
                   name="status"
                   value={formData.status || 'active'}
-                  onChange={(value) =>
-                    setFormData({ ...formData, status: value })
-                  }
+                  onChange={(value) => setFormData({ ...formData, status: value })}
                   options={[
                     { value: 'active', label: '활성' },
                     { value: 'inactive', label: '비활성' },
@@ -624,16 +601,18 @@ export const ManagementPage: React.FC = () => {
             </>
           ) : (
             <>
-              <FormInput
-                name="title"
-                value={formData.title || ''}
-                onChange={(value) => setFormData({ ...formData, title: value })}
-                label="제목"
-                placeholder="게시글 제목을 입력하세요"
-                required
-                width="full"
-                fieldType="postTitle"
-              />
+              <FormField>
+                <Label htmlFor="title">
+                  제목 <span className="text-feedback-error">*</span>
+                </Label>
+                <Input
+                  id="title"
+                  name="title"
+                  value={formData.title || ''}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  placeholder="게시글 제목을 입력하세요"
+                />
+              </FormField>
               <div
                 style={{
                   display: 'grid',
@@ -641,23 +620,22 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormInput
-                  name="author"
-                  value={formData.author || ''}
-                  onChange={(value) =>
-                    setFormData({ ...formData, author: value })
-                  }
-                  label="작성자"
-                  placeholder="작성자명"
-                  required
-                  width="full"
-                />
+                <FormField>
+                  <Label htmlFor="author">
+                    작성자 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="author"
+                    name="author"
+                    value={formData.author || ''}
+                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                    placeholder="작성자명"
+                  />
+                </FormField>
                 <FormSelect
                   name="category"
                   value={formData.category || ''}
-                  onChange={(value) =>
-                    setFormData({ ...formData, category: value })
-                  }
+                  onChange={(value) => setFormData({ ...formData, category: value })}
                   options={[
                     { value: 'development', label: 'Development' },
                     { value: 'design', label: 'Design' },
@@ -671,9 +649,7 @@ export const ManagementPage: React.FC = () => {
               <FormTextarea
                 name="content"
                 value={formData.content || ''}
-                onChange={(value) =>
-                  setFormData({ ...formData, content: value })
-                }
+                onChange={(value) => setFormData({ ...formData, content: value })}
                 label="내용"
                 placeholder="게시글 내용을 입력하세요"
                 rows={6}
@@ -712,40 +688,41 @@ export const ManagementPage: React.FC = () => {
           </>
         }
       >
-        <div>
+        <div className="space-y-4">
           {selectedItem && (
             <Alert variant="info">
               ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
-              {entityType === 'post' &&
-                ` | 조회수: ${(selectedItem as Post).views}`}
+              {entityType === 'post' && ` | 조회수: ${(selectedItem as Post).views}`}
             </Alert>
           )}
 
           {entityType === 'user' ? (
             <>
-              <FormInput
-                name="username"
-                value={formData.username || ''}
-                onChange={(value) =>
-                  setFormData({ ...formData, username: value })
-                }
-                label="사용자명"
-                placeholder="사용자명을 입력하세요"
-                required
-                width="full"
-                fieldType="username"
-              />
-              <FormInput
-                name="email"
-                value={formData.email || ''}
-                onChange={(value) => setFormData({ ...formData, email: value })}
-                label="이메일"
-                placeholder="이메일을 입력하세요"
-                type="email"
-                required
-                width="full"
-                fieldType="email"
-              />
+              <FormField>
+                <Label htmlFor="edit-username">
+                  사용자명 <span className="text-feedback-error">*</span>
+                </Label>
+                <Input
+                  id="edit-username"
+                  name="username"
+                  value={formData.username || ''}
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  placeholder="사용자명을 입력하세요"
+                />
+              </FormField>
+              <FormField>
+                <Label htmlFor="edit-email">
+                  이메일 <span className="text-feedback-error">*</span>
+                </Label>
+                <Input
+                  id="edit-email"
+                  name="email"
+                  type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="이메일을 입력하세요"
+                />
+              </FormField>
               <div
                 style={{
                   display: 'grid',
@@ -756,9 +733,7 @@ export const ManagementPage: React.FC = () => {
                 <FormSelect
                   name="role"
                   value={formData.role || 'user'}
-                  onChange={(value) =>
-                    setFormData({ ...formData, role: value })
-                  }
+                  onChange={(value) => setFormData({ ...formData, role: value })}
                   options={[
                     { value: 'user', label: '사용자' },
                     { value: 'moderator', label: '운영자' },
@@ -770,9 +745,7 @@ export const ManagementPage: React.FC = () => {
                 <FormSelect
                   name="status"
                   value={formData.status || 'active'}
-                  onChange={(value) =>
-                    setFormData({ ...formData, status: value })
-                  }
+                  onChange={(value) => setFormData({ ...formData, status: value })}
                   options={[
                     { value: 'active', label: '활성' },
                     { value: 'inactive', label: '비활성' },
@@ -785,16 +758,18 @@ export const ManagementPage: React.FC = () => {
             </>
           ) : (
             <>
-              <FormInput
-                name="title"
-                value={formData.title || ''}
-                onChange={(value) => setFormData({ ...formData, title: value })}
-                label="제목"
-                placeholder="게시글 제목을 입력하세요"
-                required
-                width="full"
-                fieldType="postTitle"
-              />
+              <FormField>
+                <Label htmlFor="title">
+                  제목 <span className="text-feedback-error">*</span>
+                </Label>
+                <Input
+                  id="title"
+                  name="title"
+                  value={formData.title || ''}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  placeholder="게시글 제목을 입력하세요"
+                />
+              </FormField>
               <div
                 style={{
                   display: 'grid',
@@ -802,23 +777,22 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormInput
-                  name="author"
-                  value={formData.author || ''}
-                  onChange={(value) =>
-                    setFormData({ ...formData, author: value })
-                  }
-                  label="작성자"
-                  placeholder="작성자명"
-                  required
-                  width="full"
-                />
+                <FormField>
+                  <Label htmlFor="author">
+                    작성자 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="author"
+                    name="author"
+                    value={formData.author || ''}
+                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                    placeholder="작성자명"
+                  />
+                </FormField>
                 <FormSelect
                   name="category"
                   value={formData.category || ''}
-                  onChange={(value) =>
-                    setFormData({ ...formData, category: value })
-                  }
+                  onChange={(value) => setFormData({ ...formData, category: value })}
                   options={[
                     { value: 'development', label: 'Development' },
                     { value: 'design', label: 'Design' },
@@ -832,9 +806,7 @@ export const ManagementPage: React.FC = () => {
               <FormTextarea
                 name="content"
                 value={formData.content || ''}
-                onChange={(value) =>
-                  setFormData({ ...formData, content: value })
-                }
+                onChange={(value) => setFormData({ ...formData, content: value })}
                 label="내용"
                 placeholder="게시글 내용을 입력하세요"
                 rows={6}
