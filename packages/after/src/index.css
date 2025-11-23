@@ -59,6 +59,12 @@
   --color-badge-secondary: var(--badge-secondary);
   --color-badge-secondary-foreground: var(--badge-secondary-foreground);
 
+  /* Input colors */
+  --color-input: var(--input);
+  --color-input-placeholder: var(--input-placeholder);
+  --color-label: var(--label);
+  --color-text-muted: var(--text-muted);
+
   /* State colors */
   --color-state-muted: var(--state-muted);
   --color-state-muted-foreground: var(--state-muted-foreground);
@@ -92,6 +98,12 @@
   /* Badge colors */
   --badge-secondary: #757575;
   --badge-secondary-foreground: #fff;
+
+  /* Input colors */
+  --input: #000;
+  --input-placeholder: #999;
+  --label: #333;
+  --text-muted: #666;
 
   /* Feedback colors - 시스템 피드백 색상 */
   --feedback-success: #388e3c;
@@ -133,6 +145,12 @@
   --action-secondary-foreground: #fafafa;
   --action-secondary-border: #616161;
   --action-secondary-hover: #616161;
+
+  /* Input colors */
+  --input: #fafafa;
+  --input-placeholder: #888;
+  --label: #e0e0e0;
+  --text-muted: #aaa;
 
   /* Feedback colors */
   --feedback-success: #66bb6a;
