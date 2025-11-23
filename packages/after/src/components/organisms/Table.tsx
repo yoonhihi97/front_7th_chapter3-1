@@ -1,6 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import { Badge } from '../atoms/Badge';
-import { Button } from '../ui/button';
+import { Badge, Button } from '../ui';
+
+// Helper functions for Badge mapping
+const getRoleVariant = (role: string) => {
+  const map: Record<
+    string,
+    'primary' | 'secondary' | 'destructive' | 'warning'
+  > = {
+    admin: 'destructive',
+    moderator: 'warning',
+    user: 'primary',
+    guest: 'secondary',
+  };
+  return map[role] || 'primary';
+};
+
+const getRoleLabel = (role: string) => {
+  const labels: Record<string, string> = {
+    admin: '관리자',
+    moderator: '운영자',
+    user: '사용자',
+    guest: '게스트',
+  };
+  return labels[role] || role;
+};
+
+const getStatusVariant = (status: string) => {
+  const map: Record<
+    string,
+    'success' | 'warning' | 'secondary' | 'info' | 'destructive'
+  > = {
+    published: 'success',
+    active: 'success',
+    draft: 'warning',
+    inactive: 'warning',
+    archived: 'secondary',
+    pending: 'info',
+    rejected: 'destructive',
+    suspended: 'destructive',
+  };
+  return map[status] || 'secondary';
+};
+
+const getStatusLabel = (status: string) => {
+  const labels: Record<string, string> = {
+    published: '게시됨',
+    draft: '임시저장',
+    archived: '보관됨',
+    pending: '대기중',
+    rejected: '거부됨',
+    active: '활성',
+    inactive: '비활성',
+    suspended: '정지',
+  };
+  return labels[status] || status;
+};
+
+const getCategoryVariant = (category: string) => {
+  const map: Record<string, 'primary' | 'info' | 'destructive' | 'secondary'> =
+    {
+      development: 'primary',
+      design: 'info',
+      accessibility: 'destructive',
+    };
+  return map[category] || 'secondary';
+};
 
 interface Column {
   key: string;
@@ -60,7 +124,8 @@ export const Table: React.FC<TableProps> = ({
   const handleSort = (columnKey: string) => {
     if (!sortable) return;
 
-    const newDirection = sortColumn === columnKey && sortDirection === 'asc' ? 'desc' : 'asc';
+    const newDirection =
+      sortColumn === columnKey && sortDirection === 'asc' ? 'desc' : 'asc';
     setSortColumn(columnKey);
     setSortDirection(newDirection);
 
@@ -80,13 +145,14 @@ export const Table: React.FC<TableProps> = ({
     setTableData(sorted);
   };
 
-  const filteredData = searchable && searchTerm
-    ? tableData.filter(row =>
-        Object.values(row).some(val =>
-          String(val).toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData =
+    searchable && searchTerm
+      ? tableData.filter((row) =>
+          Object.values(row).some((val) =>
+            String(val).toLowerCase().includes(searchTerm.toLowerCase())
+          )
         )
-      )
-    : tableData;
+      : tableData;
 
   const paginatedData = filteredData.slice(
     (currentPage - 1) * pageSize,
@@ -100,9 +166,19 @@ export const Table: React.FC<TableProps> = ({
     striped && 'table-striped',
     bordered && 'table-bordered',
     hover && 'table-hover',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const actualColumns = columns || (tableData[0] ? Object.keys(tableData[0]).map(key => ({ key, header: key, width: undefined })) : []);
+  const actualColumns =
+    columns ||
+    (tableData[0]
+      ? Object.keys(tableData[0]).map((key) => ({
+          key,
+          header: key,
+          width: undefined,
+        }))
+      : []);
 
   // 🚨 Bad Practice: Table 컴포넌트가 도메인별 렌더링 로직을 알고 있음
   const renderCell = (row: any, columnKey: string) => {
@@ -111,14 +187,16 @@ export const Table: React.FC<TableProps> = ({
     // 도메인별 특수 렌더링
     if (entityType === 'user') {
       if (columnKey === 'role') {
-        return <Badge userRole={value} showIcon />;
+        return (
+          <Badge variant={getRoleVariant(value)}>{getRoleLabel(value)}</Badge>
+        );
       }
       if (columnKey === 'status') {
-        // User status를 Badge status로 변환
-        const badgeStatus =
-          value === 'active' ? 'published' :
-          value === 'inactive' ? 'draft' : 'rejected';
-        return <Badge status={badgeStatus} showIcon />;
+        return (
+          <Badge variant={getStatusVariant(value)}>
+            {getStatusLabel(value)}
+          </Badge>
+        );
       }
       if (columnKey === 'lastLogin') {
         return value || '-';
@@ -129,7 +207,11 @@ export const Table: React.FC<TableProps> = ({
             <Button size="sm" variant="default" onClick={() => onEdit?.(row)}>
               수정
             </Button>
-            <Button size="sm" variant="destructive" onClick={() => onDelete?.(row.id)}>
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={() => onDelete?.(row.id)}
+            >
               삭제
             </Button>
           </div>
@@ -139,15 +221,14 @@ export const Table: React.FC<TableProps> = ({
 
     if (entityType === 'post') {
       if (columnKey === 'category') {
-        const type =
-          value === 'development' ? 'primary' :
-          value === 'design' ? 'info' :
-          value === 'accessibility' ? 'danger' :
-          'secondary';
-        return <Badge type={type} pill>{value}</Badge>;
+        return <Badge variant={getCategoryVariant(value)}>{value}</Badge>;
       }
       if (columnKey === 'status') {
-        return <Badge status={value} showIcon />;
+        return (
+          <Badge variant={getStatusVariant(value)}>
+            {getStatusLabel(value)}
+          </Badge>
+        );
       }
       if (columnKey === 'views') {
         return value?.toLocaleString() || '0';
@@ -185,7 +266,11 @@ export const Table: React.FC<TableProps> = ({
                 복원
               </Button>
             )}
-            <Button size="sm" variant="destructive" onClick={() => onDelete?.(row.id)}>
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={() => onDelete?.(row.id)}
+            >
               삭제
             </Button>
           </div>
@@ -229,7 +314,14 @@ export const Table: React.FC<TableProps> = ({
                 style={column.width ? { width: column.width } : undefined}
                 onClick={() => sortable && handleSort(column.key)}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: sortable ? 'pointer' : 'default' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    cursor: sortable ? 'pointer' : 'default',
+                  }}
+                >
                   {column.header}
                   {sortable && sortColumn === column.key && (
                     <span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
@@ -257,14 +349,16 @@ export const Table: React.FC<TableProps> = ({
       </table>
 
       {totalPages > 1 && (
-        <div style={{
-          marginTop: '16px',
-          display: 'flex',
-          gap: '8px',
-          justifyContent: 'center',
-        }}>
+        <div
+          style={{
+            marginTop: '16px',
+            display: 'flex',
+            gap: '8px',
+            justifyContent: 'center',
+          }}
+        >
           <button
-            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
             style={{
               padding: '6px 12px',
@@ -280,7 +374,7 @@ export const Table: React.FC<TableProps> = ({
             {currentPage} / {totalPages}
           </span>
           <button
-            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
             style={{
               padding: '6px 12px',
