@@ -87,6 +87,26 @@
   --z-index-modal: 1050;
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
+
+  /* Form control spacing - 공통 토큰 */
+  --spacing-form-control-x: 0.625rem; /* 10px - Input, Select */
+  --spacing-form-control-y: 0.5rem; /* 8px */
+  --spacing-form-control-x-focus: 0.5625rem; /* 9px - border 보정 */
+  --spacing-form-control-y-focus: 0.4375rem; /* 7px */
+
+  /* Textarea spacing - Textarea 전용 */
+  --spacing-textarea-x: 0.875rem; /* 14px */
+  --spacing-textarea-y: 1.03125rem; /* 16.5px */
+  --spacing-textarea-x-focus: 0.8125rem; /* 13px - border 보정 */
+  --spacing-textarea-y-focus: 0.96875rem; /* 15.5px */
+
+  /* Border widths */
+  --border-width-default: 1px;
+  --border-width-focus: 2px;
+
+  /* Textarea specific */
+  --radius-textarea: 0.25rem; /* 4px */
+  --line-height-textarea: 1.1876;
 }
 
 :root {
