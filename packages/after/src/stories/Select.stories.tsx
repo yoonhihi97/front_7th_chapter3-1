@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { FormField, FormDescription, FormMessage } from '@/components/ui/form';
+import { Field, FieldDescription, FieldMessage } from '@/components/ui/field';
 import { Label } from '@/components/ui/label';
 
 const meta = {
@@ -60,7 +60,7 @@ export const WithLabel: Story = {
 
     return (
       <div className="w-80">
-        <FormField>
+        <Field>
           <Label htmlFor="framework">Framework</Label>
           <Select value={value} onValueChange={setValue}>
             <SelectTrigger id="framework">
@@ -74,7 +74,7 @@ export const WithLabel: Story = {
               ))}
             </SelectContent>
           </Select>
-        </FormField>
+        </Field>
       </div>
     );
   },
@@ -87,7 +87,7 @@ export const WithHelperText: Story = {
 
     return (
       <div className="w-80">
-        <FormField>
+        <Field>
           <Label htmlFor="framework">Framework</Label>
           <Select value={value} onValueChange={setValue}>
             <SelectTrigger id="framework">
@@ -101,8 +101,8 @@ export const WithHelperText: Story = {
               ))}
             </SelectContent>
           </Select>
-          <FormDescription>Choose your preferred JavaScript framework</FormDescription>
-        </FormField>
+          <FieldDescription>Choose your preferred JavaScript framework</FieldDescription>
+        </Field>
       </div>
     );
   },
@@ -115,7 +115,7 @@ export const WithError: Story = {
 
     return (
       <div className="w-80">
-        <FormField>
+        <Field>
           <Label htmlFor="framework">Framework</Label>
           <Select value={value} onValueChange={setValue}>
             <SelectTrigger id="framework" error>
@@ -129,8 +129,8 @@ export const WithError: Story = {
               ))}
             </SelectContent>
           </Select>
-          <FormMessage>Framework is required</FormMessage>
-        </FormField>
+          <FieldMessage>Framework is required</FieldMessage>
+        </Field>
       </div>
     );
   },
@@ -142,7 +142,7 @@ export const Required: Story = {
 
     return (
       <div className="w-80">
-        <FormField>
+        <Field>
           <Label htmlFor="framework">
             Framework <span className="text-feedback-error ml-1">*</span>
           </Label>
@@ -158,8 +158,8 @@ export const Required: Story = {
               ))}
             </SelectContent>
           </Select>
-          <FormDescription>This field is required</FormDescription>
-        </FormField>
+          <FieldDescription>This field is required</FieldDescription>
+        </Field>
       </div>
     );
   },
@@ -169,7 +169,7 @@ export const Disabled: Story = {
   render: () => {
     return (
       <div className="w-80">
-        <FormField>
+        <Field>
           <Label htmlFor="framework">Framework</Label>
           <Select value="react" disabled>
             <SelectTrigger id="framework">
@@ -183,7 +183,7 @@ export const Disabled: Story = {
               ))}
             </SelectContent>
           </Select>
-        </FormField>
+        </Field>
       </div>
     );
   },
@@ -201,7 +201,7 @@ export const LongOptionsList: Story = {
 
     return (
       <div className="w-80">
-        <FormField>
+        <Field>
           <Label htmlFor="long-list">Long List</Label>
           <Select value={value} onValueChange={setValue}>
             <SelectTrigger id="long-list">
@@ -215,8 +215,8 @@ export const LongOptionsList: Story = {
               ))}
             </SelectContent>
           </Select>
-          <FormDescription>Scroll to see all 30 options</FormDescription>
-        </FormField>
+          <FieldDescription>Scroll to see all 30 options</FieldDescription>
+        </Field>
       </div>
     );
   },
@@ -231,7 +231,7 @@ export const MultipleSelects: Story = {
 
     return (
       <div className="space-y-4 w-96">
-        <FormField>
+        <Field>
           <Label htmlFor="category">
             Category <span className="text-feedback-error ml-1">*</span>
           </Label>
@@ -245,10 +245,10 @@ export const MultipleSelects: Story = {
               <SelectItem value="accessibility">Accessibility</SelectItem>
             </SelectContent>
           </Select>
-          <FormDescription>Select a post category</FormDescription>
-        </FormField>
+          <FieldDescription>Select a post category</FieldDescription>
+        </Field>
 
-        <FormField>
+        <Field>
           <Label htmlFor="status">Status</Label>
           <Select value={status} onValueChange={setStatus}>
             <SelectTrigger id="status">
@@ -260,9 +260,9 @@ export const MultipleSelects: Story = {
               <SelectItem value="archived">Archived</SelectItem>
             </SelectContent>
           </Select>
-        </FormField>
+        </Field>
 
-        <FormField>
+        <Field>
           <Label htmlFor="priority">Priority</Label>
           <Select value={priority} onValueChange={setPriority}>
             <SelectTrigger id="priority">
@@ -274,7 +274,7 @@ export const MultipleSelects: Story = {
               <SelectItem value="high">High</SelectItem>
             </SelectContent>
           </Select>
-        </FormField>
+        </Field>
       </div>
     );
   },
@@ -296,7 +296,7 @@ export const FullFormExample: Story = {
 
     return (
       <div className="space-y-4 w-96">
-        <FormField>
+        <Field>
           <Label htmlFor="role">
             Role <span className="text-feedback-error ml-1">*</span>
           </Label>
@@ -316,11 +316,11 @@ export const FullFormExample: Story = {
               <SelectItem value="admin">Admin</SelectItem>
             </SelectContent>
           </Select>
-          {!errors.role && <FormDescription>Choose the user's role</FormDescription>}
-          {errors.role && <FormMessage>{errors.role}</FormMessage>}
-        </FormField>
+          {!errors.role && <FieldDescription>Choose the user's role</FieldDescription>}
+          {errors.role && <FieldMessage>{errors.role}</FieldMessage>}
+        </Field>
 
-        <FormField>
+        <Field>
           <Label htmlFor="status">
             Status <span className="text-feedback-error ml-1">*</span>
           </Label>
@@ -340,9 +340,9 @@ export const FullFormExample: Story = {
               <SelectItem value="suspended">Suspended</SelectItem>
             </SelectContent>
           </Select>
-          {!errors.status && <FormDescription>Choose the account status</FormDescription>}
-          {errors.status && <FormMessage>{errors.status}</FormMessage>}
-        </FormField>
+          {!errors.status && <FieldDescription>Choose the account status</FieldDescription>}
+          {errors.status && <FieldMessage>{errors.status}</FieldMessage>}
+        </Field>
 
         <button
           onClick={handleSubmit}
@@ -364,7 +364,7 @@ export const StyleComparison: Story = {
       <div className="space-y-6 w-96">
         <div>
           <h3 className="text-sm font-bold mb-3">After (TailwindCSS + CVA + Radix UI)</h3>
-          <FormField>
+          <Field>
             <Label htmlFor="after">Framework</Label>
             <Select value={value} onValueChange={setValue}>
               <SelectTrigger id="after">
@@ -378,8 +378,8 @@ export const StyleComparison: Story = {
                 ))}
               </SelectContent>
             </Select>
-            <FormDescription>Modern design with design tokens</FormDescription>
-          </FormField>
+            <FieldDescription>Modern design with design tokens</FieldDescription>
+          </Field>
         </div>
 
         <div className="border-t pt-6">
@@ -398,7 +398,7 @@ export const StyleComparison: Story = {
 
         <div>
           <h4 className="text-sm font-bold mb-3">Error 상태</h4>
-          <FormField>
+          <Field>
             <Label htmlFor="error-state">Framework</Label>
             <Select value="" onValueChange={() => {}}>
               <SelectTrigger id="error-state" error>
@@ -412,13 +412,13 @@ export const StyleComparison: Story = {
                 ))}
               </SelectContent>
             </Select>
-            <FormMessage>This field is required</FormMessage>
-          </FormField>
+            <FieldMessage>This field is required</FieldMessage>
+          </Field>
         </div>
 
         <div>
           <h4 className="text-sm font-bold mb-3">Disabled 상태</h4>
-          <FormField>
+          <Field>
             <Label htmlFor="disabled-state">Framework</Label>
             <Select value="react" disabled>
               <SelectTrigger id="disabled-state">
@@ -432,7 +432,7 @@ export const StyleComparison: Story = {
                 ))}
               </SelectContent>
             </Select>
-          </FormField>
+          </Field>
         </div>
       </div>
     );
@@ -447,7 +447,7 @@ export const AccessibilityTest: Story = {
 
     return (
       <div className="space-y-4 w-96">
-        <FormField>
+        <Field>
           <Label htmlFor="accessible-select">
             Accessible Select <span className="text-feedback-error ml-1">*</span>
           </Label>
@@ -463,10 +463,10 @@ export const AccessibilityTest: Story = {
               ))}
             </SelectContent>
           </Select>
-          <FormDescription>This select has proper ARIA attributes</FormDescription>
-        </FormField>
+          <FieldDescription>This select has proper ARIA attributes</FieldDescription>
+        </Field>
 
-        <FormField>
+        <Field>
           <Label htmlFor="error-accessible">Error State Accessibility</Label>
           <Select value={errorValue} onValueChange={setErrorValue}>
             <SelectTrigger id="error-accessible" error aria-invalid>
@@ -480,8 +480,8 @@ export const AccessibilityTest: Story = {
               ))}
             </SelectContent>
           </Select>
-          <FormMessage>This field is required</FormMessage>
-        </FormField>
+          <FieldMessage>This field is required</FieldMessage>
+        </Field>
 
         <div className="border-t pt-4 mt-4">
           <p className="text-xs text-text-muted">

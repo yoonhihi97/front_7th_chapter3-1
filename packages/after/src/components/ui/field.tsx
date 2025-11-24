@@ -2,22 +2,22 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-// Form Field Container
-interface FormFieldProps {
+// Field Container
+interface FieldProps {
   children: React.ReactNode;
   className?: string;
 }
 
-const FormField = ({ children, className }: FormFieldProps) => (
+const Field = ({ children, className }: FieldProps) => (
   <div className={cn('grid gap-1.5', className)}>{children}</div>
 );
 
-// Form Description (Helper text)
-interface FormDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+// Field Description (Helper text)
+interface FieldDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
   error?: boolean;
 }
 
-const FormDescription = React.forwardRef<HTMLParagraphElement, FormDescriptionProps>(
+const FieldDescription = React.forwardRef<HTMLParagraphElement, FieldDescriptionProps>(
   ({ className, error, ...props }, ref) => (
     <p
       ref={ref}
@@ -27,10 +27,10 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, FormDescriptionPr
     />
   )
 );
-FormDescription.displayName = 'FormDescription';
+FieldDescription.displayName = 'FieldDescription';
 
-// Form Message (Error message)
-const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+// Field Message (Error message)
+const FieldMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, children, ...props }, ref) => {
     if (!children) return null;
 
@@ -41,6 +41,6 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
     );
   }
 );
-FormMessage.displayName = 'FormMessage';
+FieldMessage.displayName = 'FieldMessage';
 
-export { FormField, FormDescription, FormMessage };
+export { Field, FieldDescription, FieldMessage };

@@ -3,7 +3,7 @@ import {
   Button,
   Input,
   Label,
-  FormField,
+  Field,
   Select,
   SelectContent,
   SelectItem,
@@ -550,7 +550,7 @@ export const ManagementPage: React.FC = () => {
         <div className="space-y-4">
           {entityType === 'user' ? (
             <>
-              <FormField>
+              <Field>
                 <Label htmlFor="username">
                   사용자명 <span className="text-feedback-error">*</span>
                 </Label>
@@ -561,8 +561,8 @@ export const ManagementPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                   placeholder="사용자명을 입력하세요"
                 />
-              </FormField>
-              <FormField>
+              </Field>
+              <Field>
                 <Label htmlFor="email">
                   이메일 <span className="text-feedback-error">*</span>
                 </Label>
@@ -574,7 +574,7 @@ export const ManagementPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="이메일을 입력하세요"
                 />
-              </FormField>
+              </Field>
               <div
                 style={{
                   display: 'grid',
@@ -582,7 +582,7 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormField>
+                <Field>
                   <Label htmlFor="role">역할</Label>
                   <Select
                     name="role"
@@ -598,8 +598,8 @@ export const ManagementPage: React.FC = () => {
                       <SelectItem value="admin">관리자</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormField>
-                <FormField>
+                </Field>
+                <Field>
                   <Label htmlFor="status">상태</Label>
                   <Select
                     name="status"
@@ -615,12 +615,12 @@ export const ManagementPage: React.FC = () => {
                       <SelectItem value="suspended">정지</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormField>
+                </Field>
               </div>
             </>
           ) : (
             <>
-              <FormField>
+              <Field>
                 <Label htmlFor="title">
                   제목 <span className="text-feedback-error">*</span>
                 </Label>
@@ -631,7 +631,7 @@ export const ManagementPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="게시글 제목을 입력하세요"
                 />
-              </FormField>
+              </Field>
               <div
                 style={{
                   display: 'grid',
@@ -639,7 +639,7 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormField>
+                <Field>
                   <Label htmlFor="author">
                     작성자 <span className="text-feedback-error">*</span>
                   </Label>
@@ -650,8 +650,8 @@ export const ManagementPage: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                     placeholder="작성자명"
                   />
-                </FormField>
-                <FormField>
+                </Field>
+                <Field>
                   <Label htmlFor="category">카테고리</Label>
                   <Select
                     name="category"
@@ -667,7 +667,7 @@ export const ManagementPage: React.FC = () => {
                       <SelectItem value="accessibility">Accessibility</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormField>
+                </Field>
               </div>
               <FormTextarea
                 name="content"
@@ -721,7 +721,7 @@ export const ManagementPage: React.FC = () => {
 
           {entityType === 'user' ? (
             <>
-              <FormField>
+              <Field>
                 <Label htmlFor="edit-username">
                   사용자명 <span className="text-feedback-error">*</span>
                 </Label>
@@ -732,8 +732,8 @@ export const ManagementPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                   placeholder="사용자명을 입력하세요"
                 />
-              </FormField>
-              <FormField>
+              </Field>
+              <Field>
                 <Label htmlFor="edit-email">
                   이메일 <span className="text-feedback-error">*</span>
                 </Label>
@@ -745,7 +745,7 @@ export const ManagementPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="이메일을 입력하세요"
                 />
-              </FormField>
+              </Field>
               <div
                 style={{
                   display: 'grid',
@@ -753,7 +753,7 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormField>
+                <Field>
                   <Label htmlFor="role">역할</Label>
                   <Select
                     name="role"
@@ -769,8 +769,8 @@ export const ManagementPage: React.FC = () => {
                       <SelectItem value="admin">관리자</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormField>
-                <FormField>
+                </Field>
+                <Field>
                   <Label htmlFor="status">상태</Label>
                   <Select
                     name="status"
@@ -786,12 +786,12 @@ export const ManagementPage: React.FC = () => {
                       <SelectItem value="suspended">정지</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormField>
+                </Field>
               </div>
             </>
           ) : (
             <>
-              <FormField>
+              <Field>
                 <Label htmlFor="title">
                   제목 <span className="text-feedback-error">*</span>
                 </Label>
@@ -802,7 +802,7 @@ export const ManagementPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="게시글 제목을 입력하세요"
                 />
-              </FormField>
+              </Field>
               <div
                 style={{
                   display: 'grid',
@@ -810,7 +810,7 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormField>
+                <Field>
                   <Label htmlFor="author">
                     작성자 <span className="text-feedback-error">*</span>
                   </Label>
@@ -821,8 +821,8 @@ export const ManagementPage: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                     placeholder="작성자명"
                   />
-                </FormField>
-                <FormField>
+                </Field>
+                <Field>
                   <Label htmlFor="category">카테고리</Label>
                   <Select
                     name="category"
@@ -838,7 +838,7 @@ export const ManagementPage: React.FC = () => {
                       <SelectItem value="accessibility">Accessibility</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormField>
+                </Field>
               </div>
               <FormTextarea
                 name="content"

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FormField, FormDescription, FormMessage } from '@/components/ui/form';
+import { Field, FieldDescription, FieldMessage } from '@/components/ui/field';
 
 const meta = {
   title: 'UI/Input',
@@ -43,32 +43,32 @@ export const Default: Story = {
 export const WithLabel: Story = {
   name: 'With Label',
   render: () => (
-    <FormField className="w-80">
+    <Field className="w-80">
       <Label htmlFor="email">이메일</Label>
       <Input id="email" type="email" placeholder="name@example.com" />
-    </FormField>
+    </Field>
   ),
 };
 
 export const WithHelperText: Story = {
   name: 'With Helper Text',
   render: () => (
-    <FormField className="w-80">
+    <Field className="w-80">
       <Label htmlFor="username">사용자명</Label>
       <Input id="username" placeholder="사용자명 입력" />
-      <FormDescription>3자 이상 입력하세요</FormDescription>
-    </FormField>
+      <FieldDescription>3자 이상 입력하세요</FieldDescription>
+    </Field>
   ),
 };
 
 export const WithError: Story = {
   name: 'With Error',
   render: () => (
-    <FormField className="w-80">
+    <Field className="w-80">
       <Label htmlFor="password">비밀번호</Label>
       <Input id="password" type="password" error />
-      <FormMessage>비밀번호는 8자 이상이어야 합니다</FormMessage>
-    </FormField>
+      <FieldMessage>비밀번호는 8자 이상이어야 합니다</FieldMessage>
+    </Field>
   ),
 };
 
@@ -83,30 +83,30 @@ export const InputTypes: Story = {
   name: 'Input Types',
   render: () => (
     <div className="space-y-4 w-80">
-      <FormField>
+      <Field>
         <Label htmlFor="text">Text</Label>
         <Input id="text" type="text" placeholder="Text input" />
-      </FormField>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="email-type">Email</Label>
         <Input id="email-type" type="email" placeholder="email@example.com" />
-      </FormField>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="password-type">Password</Label>
         <Input id="password-type" type="password" placeholder="Enter password" />
-      </FormField>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="number">Number</Label>
         <Input id="number" type="number" placeholder="Enter number" />
-      </FormField>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="url">URL</Label>
         <Input id="url" type="url" placeholder="https://example.com" />
-      </FormField>
+      </Field>
     </div>
   ),
 };
@@ -115,32 +115,32 @@ export const FullFormExample: Story = {
   name: 'Full Form Example',
   render: () => (
     <div className="space-y-4 w-96">
-      <FormField>
+      <Field>
         <Label htmlFor="name">
           이름 <span className="text-feedback-error">*</span>
         </Label>
         <Input id="name" placeholder="홍길동" />
-      </FormField>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="email-form">
           이메일 <span className="text-feedback-error">*</span>
         </Label>
         <Input id="email-form" type="email" placeholder="name@example.com" />
-        <FormDescription>회사 이메일을 입력하세요</FormDescription>
-      </FormField>
+        <FieldDescription>회사 이메일을 입력하세요</FieldDescription>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="bio">소개</Label>
         <Input id="bio" placeholder="간단한 자기소개" />
-        <FormDescription>선택 사항입니다</FormDescription>
-      </FormField>
+        <FieldDescription>선택 사항입니다</FieldDescription>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="error-example">사용자명</Label>
         <Input id="error-example" placeholder="사용자명 입력" error />
-        <FormMessage>이미 사용 중인 사용자명입니다</FormMessage>
-      </FormField>
+        <FieldMessage>이미 사용 중인 사용자명입니다</FieldMessage>
+      </Field>
     </div>
   ),
 };
@@ -151,11 +151,11 @@ export const StyleComparison: Story = {
     <div className="space-y-6 w-96">
       <div>
         <h3 className="text-sm font-bold mb-3">After (TailwindCSS + 디자인 토큰)</h3>
-        <FormField>
+        <Field>
           <Label htmlFor="test1">사용자명</Label>
           <Input id="test1" placeholder="사용자명 입력" />
-          <FormDescription>3자 이상 입력하세요</FormDescription>
-        </FormField>
+          <FieldDescription>3자 이상 입력하세요</FieldDescription>
+        </Field>
       </div>
 
       <div className="border-t pt-6">
@@ -175,20 +175,20 @@ export const StyleComparison: Story = {
 
       <div>
         <h4 className="text-sm font-bold mb-3">Error 상태</h4>
-        <FormField>
+        <Field>
           <Label htmlFor="error-state">비밀번호</Label>
           <Input id="error-state" type="password" error />
-          <FormMessage>비밀번호는 8자 이상이어야 합니다</FormMessage>
-        </FormField>
+          <FieldMessage>비밀번호는 8자 이상이어야 합니다</FieldMessage>
+        </Field>
       </div>
 
       <div>
         <h4 className="text-sm font-bold mb-3">Disabled 상태</h4>
-        <FormField>
+        <Field>
           <Label htmlFor="disabled-state">비활성화 입력</Label>
           <Input id="disabled-state" value="Disabled" disabled />
-          <FormDescription>이 필드는 비활성화되었습니다</FormDescription>
-        </FormField>
+          <FieldDescription>이 필드는 비활성화되었습니다</FieldDescription>
+        </Field>
       </div>
     </div>
   ),
@@ -198,17 +198,17 @@ export const AccessibilityTest: Story = {
   name: 'Accessibility Test',
   render: () => (
     <div className="space-y-4 w-96">
-      <FormField>
+      <Field>
         <Label htmlFor="accessible-input">접근성 테스트 입력</Label>
         <Input id="accessible-input" placeholder="입력하세요" aria-describedby="help-text" />
-        <FormDescription id="help-text">이 필드는 필수 입력 항목입니다</FormDescription>
-      </FormField>
+        <FieldDescription id="help-text">이 필드는 필수 입력 항목입니다</FieldDescription>
+      </Field>
 
-      <FormField>
+      <Field>
         <Label htmlFor="error-accessible">에러 메시지 접근성</Label>
         <Input id="error-accessible" error aria-invalid="true" aria-describedby="error-message" />
-        <FormMessage id="error-message">유효하지 않은 입력입니다</FormMessage>
-      </FormField>
+        <FieldMessage id="error-message">유효하지 않은 입력입니다</FieldMessage>
+      </Field>
 
       <div className="border-t pt-4 mt-4">
         <p className="text-xs text-text-muted">
