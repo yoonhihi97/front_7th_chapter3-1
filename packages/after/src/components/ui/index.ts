@@ -17,3 +17,12 @@ export {
   SelectValue,
   type SelectTriggerProps,
 } from './select';
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+} from './card';

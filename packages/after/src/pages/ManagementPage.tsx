@@ -10,6 +10,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
 } from '../components/ui';
 import { Alert, Table, Modal } from '../components/organisms';
 import { userService } from '../services/userService';
@@ -347,153 +351,71 @@ export const ManagementPage: React.FC = () => {
               </div>
             )}
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-                gap: '10px',
-                marginBottom: '15px',
-              }}
-            >
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#e3f2fd',
-                  border: '1px solid #90caf9',
-                  borderRadius: '3px',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  전체
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#1976d2',
-                  }}
-                >
-                  {stats.total}
-                </div>
-              </div>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 mb-4">
+              <Card stat="info">
+                <CardHeader className="py-0 pt-3 px-[15px] pb-1">
+                  <CardTitle className="text-xs text-gray-600 font-normal">
+                    전체
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="py-0 px-[15px] pb-3">
+                  <div className="text-2xl font-bold text-blue-600">
+                    {stats.total}
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#e8f5e9',
-                  border: '1px solid #81c784',
-                  borderRadius: '3px',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat1.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#388e3c',
-                  }}
-                >
-                  {stats.stat1.value}
-                </div>
-              </div>
+              <Card stat="success">
+                <CardHeader className="py-0 pt-3 px-[15px] pb-1">
+                  <CardTitle className="text-xs text-gray-600 font-normal">
+                    {stats.stat1.label}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="py-0 px-[15px] pb-3">
+                  <div className="text-2xl font-bold text-green-700">
+                    {stats.stat1.value}
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#fff3e0',
-                  border: '1px solid #ffb74d',
-                  borderRadius: '3px',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat2.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#f57c00',
-                  }}
-                >
-                  {stats.stat2.value}
-                </div>
-              </div>
+              <Card stat="warning">
+                <CardHeader className="py-0 pt-3 px-[15px] pb-1">
+                  <CardTitle className="text-xs text-gray-600 font-normal">
+                    {stats.stat2.label}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="py-0 px-[15px] pb-3">
+                  <div className="text-2xl font-bold text-orange-600">
+                    {stats.stat2.value}
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#ffebee',
-                  border: '1px solid #e57373',
-                  borderRadius: '3px',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat3.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#d32f2f',
-                  }}
-                >
-                  {stats.stat3.value}
-                </div>
-              </div>
+              <Card stat="error">
+                <CardHeader className="py-0 pt-3 px-[15px] pb-1">
+                  <CardTitle className="text-xs text-gray-600 font-normal">
+                    {stats.stat3.label}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="py-0 px-[15px] pb-3">
+                  <div className="text-2xl font-bold text-red-600">
+                    {stats.stat3.value}
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div
-                style={{
-                  padding: '12px 15px',
-                  background: '#f5f5f5',
-                  border: '1px solid #bdbdbd',
-                  borderRadius: '3px',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '12px',
-                    color: '#666',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {stats.stat4.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    color: '#424242',
-                  }}
-                >
-                  {stats.stat4.value}
-                </div>
-              </div>
+              <Card stat="neutral">
+                <CardHeader className="py-0 pt-3 px-[15px] pb-1">
+                  <CardTitle className="text-xs text-gray-600 font-normal">
+                    {stats.stat4.label}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="py-0 px-[15px] pb-3">
+                  <div className="text-2xl font-bold text-gray-700">
+                    {stats.stat4.value}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             <div
