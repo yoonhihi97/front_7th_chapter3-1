@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../components/ui';
+import {
+  Button,
+  Input,
+  Label,
+  FormField,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../components/ui';
 import { Alert, Table, Modal } from '../components/organisms';
-import { FormSelect, FormTextarea } from '../components/molecules';
-import { Input, Label, FormField } from '../components/ui';
+import { FormTextarea } from '../components/molecules';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
@@ -573,30 +582,40 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormSelect
-                  name="role"
-                  value={formData.role || 'user'}
-                  onChange={(value) => setFormData({ ...formData, role: value })}
-                  options={[
-                    { value: 'user', label: '사용자' },
-                    { value: 'moderator', label: '운영자' },
-                    { value: 'admin', label: '관리자' },
-                  ]}
-                  label="역할"
-                  size="md"
-                />
-                <FormSelect
-                  name="status"
-                  value={formData.status || 'active'}
-                  onChange={(value) => setFormData({ ...formData, status: value })}
-                  options={[
-                    { value: 'active', label: '활성' },
-                    { value: 'inactive', label: '비활성' },
-                    { value: 'suspended', label: '정지' },
-                  ]}
-                  label="상태"
-                  size="md"
-                />
+                <FormField>
+                  <Label htmlFor="role">역할</Label>
+                  <Select
+                    name="role"
+                    value={formData.role || 'user'}
+                    onValueChange={(value) => setFormData({ ...formData, role: value })}
+                  >
+                    <SelectTrigger id="role">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="user">사용자</SelectItem>
+                      <SelectItem value="moderator">운영자</SelectItem>
+                      <SelectItem value="admin">관리자</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField>
+                  <Label htmlFor="status">상태</Label>
+                  <Select
+                    name="status"
+                    value={formData.status || 'active'}
+                    onValueChange={(value) => setFormData({ ...formData, status: value })}
+                  >
+                    <SelectTrigger id="status">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">활성</SelectItem>
+                      <SelectItem value="inactive">비활성</SelectItem>
+                      <SelectItem value="suspended">정지</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
               </div>
             </>
           ) : (
@@ -632,19 +651,23 @@ export const ManagementPage: React.FC = () => {
                     placeholder="작성자명"
                   />
                 </FormField>
-                <FormSelect
-                  name="category"
-                  value={formData.category || ''}
-                  onChange={(value) => setFormData({ ...formData, category: value })}
-                  options={[
-                    { value: 'development', label: 'Development' },
-                    { value: 'design', label: 'Design' },
-                    { value: 'accessibility', label: 'Accessibility' },
-                  ]}
-                  label="카테고리"
-                  placeholder="카테고리 선택"
-                  size="md"
-                />
+                <FormField>
+                  <Label htmlFor="category">카테고리</Label>
+                  <Select
+                    name="category"
+                    value={formData.category || ''}
+                    onValueChange={(value) => setFormData({ ...formData, category: value })}
+                  >
+                    <SelectTrigger id="category">
+                      <SelectValue placeholder="카테고리 선택" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="development">Development</SelectItem>
+                      <SelectItem value="design">Design</SelectItem>
+                      <SelectItem value="accessibility">Accessibility</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
               </div>
               <FormTextarea
                 name="content"
@@ -730,30 +753,40 @@ export const ManagementPage: React.FC = () => {
                   gap: '16px',
                 }}
               >
-                <FormSelect
-                  name="role"
-                  value={formData.role || 'user'}
-                  onChange={(value) => setFormData({ ...formData, role: value })}
-                  options={[
-                    { value: 'user', label: '사용자' },
-                    { value: 'moderator', label: '운영자' },
-                    { value: 'admin', label: '관리자' },
-                  ]}
-                  label="역할"
-                  size="md"
-                />
-                <FormSelect
-                  name="status"
-                  value={formData.status || 'active'}
-                  onChange={(value) => setFormData({ ...formData, status: value })}
-                  options={[
-                    { value: 'active', label: '활성' },
-                    { value: 'inactive', label: '비활성' },
-                    { value: 'suspended', label: '정지' },
-                  ]}
-                  label="상태"
-                  size="md"
-                />
+                <FormField>
+                  <Label htmlFor="role">역할</Label>
+                  <Select
+                    name="role"
+                    value={formData.role || 'user'}
+                    onValueChange={(value) => setFormData({ ...formData, role: value })}
+                  >
+                    <SelectTrigger id="role">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="user">사용자</SelectItem>
+                      <SelectItem value="moderator">운영자</SelectItem>
+                      <SelectItem value="admin">관리자</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+                <FormField>
+                  <Label htmlFor="status">상태</Label>
+                  <Select
+                    name="status"
+                    value={formData.status || 'active'}
+                    onValueChange={(value) => setFormData({ ...formData, status: value })}
+                  >
+                    <SelectTrigger id="status">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">활성</SelectItem>
+                      <SelectItem value="inactive">비활성</SelectItem>
+                      <SelectItem value="suspended">정지</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
               </div>
             </>
           ) : (
@@ -789,19 +822,23 @@ export const ManagementPage: React.FC = () => {
                     placeholder="작성자명"
                   />
                 </FormField>
-                <FormSelect
-                  name="category"
-                  value={formData.category || ''}
-                  onChange={(value) => setFormData({ ...formData, category: value })}
-                  options={[
-                    { value: 'development', label: 'Development' },
-                    { value: 'design', label: 'Design' },
-                    { value: 'accessibility', label: 'Accessibility' },
-                  ]}
-                  label="카테고리"
-                  placeholder="카테고리 선택"
-                  size="md"
-                />
+                <FormField>
+                  <Label htmlFor="category">카테고리</Label>
+                  <Select
+                    name="category"
+                    value={formData.category || ''}
+                    onValueChange={(value) => setFormData({ ...formData, category: value })}
+                  >
+                    <SelectTrigger id="category">
+                      <SelectValue placeholder="카테고리 선택" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="development">Development</SelectItem>
+                      <SelectItem value="design">Design</SelectItem>
+                      <SelectItem value="accessibility">Accessibility</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
               </div>
               <FormTextarea
                 name="content"
