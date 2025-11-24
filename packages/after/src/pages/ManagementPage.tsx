@@ -4,6 +4,7 @@ import {
   Input,
   Label,
   Field,
+  Textarea,
   Select,
   SelectContent,
   SelectItem,
@@ -11,7 +12,6 @@ import {
   SelectValue,
 } from '../components/ui';
 import { Alert, Table, Modal } from '../components/organisms';
-import { FormTextarea } from '../components/molecules';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
@@ -669,14 +669,17 @@ export const ManagementPage: React.FC = () => {
                   </Select>
                 </Field>
               </div>
-              <FormTextarea
-                name="content"
-                value={formData.content || ''}
-                onChange={(value) => setFormData({ ...formData, content: value })}
-                label="내용"
-                placeholder="게시글 내용을 입력하세요"
-                rows={6}
-              />
+              <Field>
+                <Label htmlFor="content">내용</Label>
+                <Textarea
+                  id="content"
+                  name="content"
+                  value={formData.content || ''}
+                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  placeholder="게시글 내용을 입력하세요"
+                  rows={6}
+                />
+              </Field>
             </>
           )}
         </div>
@@ -840,14 +843,17 @@ export const ManagementPage: React.FC = () => {
                   </Select>
                 </Field>
               </div>
-              <FormTextarea
-                name="content"
-                value={formData.content || ''}
-                onChange={(value) => setFormData({ ...formData, content: value })}
-                label="내용"
-                placeholder="게시글 내용을 입력하세요"
-                rows={6}
-              />
+              <Field>
+                <Label htmlFor="content">내용</Label>
+                <Textarea
+                  id="content"
+                  name="content"
+                  value={formData.content || ''}
+                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  placeholder="게시글 내용을 입력하세요"
+                  rows={6}
+                />
+              </Field>
             </>
           )}
         </div>
