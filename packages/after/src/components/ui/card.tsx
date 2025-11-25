@@ -4,16 +4,23 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const cardVariants = cva(
-  "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+  "bg-(--card-bg) text-(--color-text-primary) flex flex-col gap-6 rounded-xl py-6 shadow-sm",
   {
     variants: {
-      stat: {
-        info: "bg-blue-50 border-blue-300 rounded-[3px] shadow-none gap-0 py-0",
-        success: "bg-green-50 border-green-400 rounded-[3px] shadow-none gap-0 py-0",
-        warning: "bg-orange-50 border-orange-300 rounded-[3px] shadow-none gap-0 py-0",
-        error: "bg-red-50 border-red-300 rounded-[3px] shadow-none gap-0 py-0",
-        neutral: "bg-gray-100 border-gray-400 rounded-[3px] shadow-none gap-0 py-0",
+      border: {
+        true: "border border-(--card-border)",
+        false: "",
       },
+      stat: {
+        info: "bg-blue-50 border border-blue-300 rounded-[var(--radius)] shadow-none gap-0 py-0",
+        success: "bg-green-50 border border-green-400 rounded-[var(--radius)] shadow-none gap-0 py-0",
+        warning: "bg-orange-50 border border-orange-300 rounded-[var(--radius)] shadow-none gap-0 py-0",
+        error: "bg-red-50 border border-red-300 rounded-[var(--radius)] shadow-none gap-0 py-0",
+        neutral: "bg-gray-100 border border-gray-400 rounded-[var(--radius)] shadow-none gap-0 py-0",
+      },
+    },
+    defaultVariants: {
+      border: false,
     },
   }
 )
@@ -22,11 +29,11 @@ export interface CardProps
   extends React.ComponentProps<"div">,
     VariantProps<typeof cardVariants> {}
 
-function Card({ className, stat, ...props }: CardProps) {
+function Card({ className, stat, border, ...props }: CardProps) {
   return (
     <div
       data-slot="card"
-      className={cn(cardVariants({ stat }), className)}
+      className={cn(cardVariants({ stat, border }), className)}
       {...props}
     />
   )
