@@ -28,20 +28,20 @@ const selectTriggerVariants = cva(
     "flex w-full items-center justify-between gap-2",
     "px-2.5 py-2",
     "text-base font-sans",
-    "text-input",
-    "rounded-[3px]",
-    "border border-solid border-border-input",
-    "bg-background",
+    "text-(--input-fg)",
+    "rounded-[var(--radius)]",
+    "border border-solid border-(--input-border)",
+    "bg-(--input-bg)",
     "transition-colors",
-    "data-[placeholder]:text-input-placeholder",
-    "focus-visible:outline-none focus-visible:border-border-focus",
-    "disabled:cursor-not-allowed disabled:bg-state-muted disabled:opacity-60",
+    "data-[placeholder]:text-(--input-placeholder)",
+    "focus-visible:outline-none focus-visible:border-(--input-border-focus)",
+    "disabled:cursor-not-allowed disabled:bg-(--input-disabled-bg) disabled:opacity-60",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],
   {
     variants: {
       error: {
-        true: "border-feedback-error focus-visible:border-feedback-error",
+        true: "border-(--color-feedback-error) focus-visible:border-(--color-feedback-error)",
         false: "",
       },
     },
@@ -87,15 +87,14 @@ function SelectContent({
       <SelectPrimitive.Content
         data-slot="select-content"
         className={cn(
-          "relative max-h-96 min-w-32 overflow-hidden rounded-md border",
-          "bg-background text-foreground shadow-md",
-          "data-[state=open]:animate-in data-[state=closed]:animate-out",
-          "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-          "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-          "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2",
-          "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          position === "popper" &&
-            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          // Base styles
+          "relative max-h-96 min-w-32 overflow-hidden rounded-md border bg-(--card-bg) text-(--color-text-primary) shadow-md",
+          // Animations
+          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+          // Slide animations by side
+          "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          // Popper positioning
+          position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
           className
         )}
         style={{ zIndex: 'var(--z-index-popover)' } as React.CSSProperties}
@@ -143,8 +142,8 @@ function SelectItem({
       className={cn(
         "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none",
         "transition-colors",
-        "hover:bg-accent hover:text-accent-foreground",
-        "focus:bg-accent focus:text-accent-foreground",
+        "hover:bg-neutral-100 hover:text-(--color-text-primary)",
+        "focus:bg-neutral-100 focus:text-(--color-text-primary)",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
         className
       )}
