@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   Table,
   TableBody,
@@ -6,11 +6,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from './table';
-import { Badge } from './badge';
+} from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
 
 const meta: Meta<typeof Table> = {
-  title: 'Components/Table',
+  title: 'UI/Table',
   component: Table,
   tags: ['autodocs'],
   parameters: {

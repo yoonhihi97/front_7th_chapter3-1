@@ -21,8 +21,15 @@ import {
   TableHead,
   TableRow,
   TableCell,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  Alert,
+  AlertTitle,
+  AlertDescription,
 } from '../components/ui';
-import { Alert, Modal } from '../components/organisms';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
@@ -375,16 +382,18 @@ export const ManagementPage: React.FC = () => {
 
             {showSuccessAlert && (
               <div style={{ marginBottom: '10px' }}>
-                <Alert variant="success" title="성공" onClose={() => setShowSuccessAlert(false)}>
-                  {alertMessage}
+                <Alert variant="success">
+                  <AlertTitle>성공</AlertTitle>
+                  <AlertDescription>{alertMessage}</AlertDescription>
                 </Alert>
               </div>
             )}
 
             {showErrorAlert && (
               <div style={{ marginBottom: '10px' }}>
-                <Alert variant="error" title="오류" onClose={() => setShowErrorAlert(false)}>
-                  {errorMessage}
+                <Alert variant="error">
+                  <AlertTitle>오류</AlertTitle>
+                  <AlertDescription>{errorMessage}</AlertDescription>
                 </Alert>
               </div>
             )}
@@ -593,17 +602,156 @@ export const ManagementPage: React.FC = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={isCreateModalOpen}
-        onClose={() => {
-          setIsCreateModalOpen(false);
-          setFormData({});
+      <Dialog
+        open={isCreateModalOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            setIsCreateModalOpen(false);
+            setFormData({});
+          }
         }}
-        title={`새 ${entityType === 'user' ? '사용자' : '게시글'} 만들기`}
-        size="large"
-        showFooter
-        footerContent={
-          <>
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{`새 ${entityType === 'user' ? '사용자' : '게시글'} 만들기`}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            {entityType === 'user' ? (
+              <>
+                <Field>
+                  <Label htmlFor="username">
+                    사용자명 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="username"
+                    name="username"
+                    value={formData.username || ''}
+                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                    placeholder="사용자명을 입력하세요"
+                  />
+                </Field>
+                <Field>
+                  <Label htmlFor="email">
+                    이메일 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email || ''}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="이메일을 입력하세요"
+                  />
+                </Field>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '16px',
+                  }}
+                >
+                  <Field>
+                    <Label htmlFor="role">역할</Label>
+                    <Select
+                      name="role"
+                      value={formData.role || 'user'}
+                      onValueChange={(value) => setFormData({ ...formData, role: value })}
+                    >
+                      <SelectTrigger id="role">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="user">사용자</SelectItem>
+                        <SelectItem value="moderator">운영자</SelectItem>
+                        <SelectItem value="admin">관리자</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                  <Field>
+                    <Label htmlFor="status">상태</Label>
+                    <Select
+                      name="status"
+                      value={formData.status || 'active'}
+                      onValueChange={(value) => setFormData({ ...formData, status: value })}
+                    >
+                      <SelectTrigger id="status">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="active">활성</SelectItem>
+                        <SelectItem value="inactive">비활성</SelectItem>
+                        <SelectItem value="suspended">정지</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                </div>
+              </>
+            ) : (
+              <>
+                <Field>
+                  <Label htmlFor="title">
+                    제목 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="title"
+                    name="title"
+                    value={formData.title || ''}
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    placeholder="게시글 제목을 입력하세요"
+                  />
+                </Field>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '16px',
+                  }}
+                >
+                  <Field>
+                    <Label htmlFor="author">
+                      작성자 <span className="text-feedback-error">*</span>
+                    </Label>
+                    <Input
+                      id="author"
+                      name="author"
+                      value={formData.author || ''}
+                      onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                      placeholder="작성자명"
+                    />
+                  </Field>
+                  <Field>
+                    <Label htmlFor="category">카테고리</Label>
+                    <Select
+                      name="category"
+                      value={formData.category || ''}
+                      onValueChange={(value) => setFormData({ ...formData, category: value })}
+                    >
+                      <SelectTrigger id="category">
+                        <SelectValue placeholder="카테고리 선택" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="development">Development</SelectItem>
+                        <SelectItem value="design">Design</SelectItem>
+                        <SelectItem value="accessibility">Accessibility</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                </div>
+                <Field>
+                  <Label htmlFor="content">내용</Label>
+                  <Textarea
+                    id="content"
+                    name="content"
+                    value={formData.content || ''}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                    placeholder="게시글 내용을 입력하세요"
+                    rows={6}
+                  />
+                </Field>
+              </>
+            )}
+          </div>
+          <DialogFooter>
             <Button
               variant="secondary"
               size="md"
@@ -617,159 +765,170 @@ export const ManagementPage: React.FC = () => {
             <Button variant="default" size="md" onClick={handleCreate}>
               생성
             </Button>
-          </>
-        }
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={isEditModalOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            setIsEditModalOpen(false);
+            setFormData({});
+            setSelectedItem(null);
+          }
+        }}
       >
-        <div className="space-y-4">
-          {entityType === 'user' ? (
-            <>
-              <Field>
-                <Label htmlFor="username">
-                  사용자명 <span className="text-feedback-error">*</span>
-                </Label>
-                <Input
-                  id="username"
-                  name="username"
-                  value={formData.username || ''}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  placeholder="사용자명을 입력하세요"
-                />
-              </Field>
-              <Field>
-                <Label htmlFor="email">
-                  이메일 <span className="text-feedback-error">*</span>
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email || ''}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="이메일을 입력하세요"
-                />
-              </Field>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '16px',
-                }}
-              >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{`${entityType === 'user' ? '사용자' : '게시글'} 수정`}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            {selectedItem && (
+              <Alert variant="info">
+                <AlertDescription>
+                  ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
+                  {entityType === 'post' && ` | 조회수: ${(selectedItem as Post).views}`}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {entityType === 'user' ? (
+              <>
                 <Field>
-                  <Label htmlFor="role">역할</Label>
-                  <Select
-                    name="role"
-                    value={formData.role || 'user'}
-                    onValueChange={(value) => setFormData({ ...formData, role: value })}
-                  >
-                    <SelectTrigger id="role">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="user">사용자</SelectItem>
-                      <SelectItem value="moderator">운영자</SelectItem>
-                      <SelectItem value="admin">관리자</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Field>
-                <Field>
-                  <Label htmlFor="status">상태</Label>
-                  <Select
-                    name="status"
-                    value={formData.status || 'active'}
-                    onValueChange={(value) => setFormData({ ...formData, status: value })}
-                  >
-                    <SelectTrigger id="status">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="active">활성</SelectItem>
-                      <SelectItem value="inactive">비활성</SelectItem>
-                      <SelectItem value="suspended">정지</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Field>
-              </div>
-            </>
-          ) : (
-            <>
-              <Field>
-                <Label htmlFor="title">
-                  제목 <span className="text-feedback-error">*</span>
-                </Label>
-                <Input
-                  id="title"
-                  name="title"
-                  value={formData.title || ''}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="게시글 제목을 입력하세요"
-                />
-              </Field>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '16px',
-                }}
-              >
-                <Field>
-                  <Label htmlFor="author">
-                    작성자 <span className="text-feedback-error">*</span>
+                  <Label htmlFor="edit-username">
+                    사용자명 <span className="text-feedback-error">*</span>
                   </Label>
                   <Input
-                    id="author"
-                    name="author"
-                    value={formData.author || ''}
-                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-                    placeholder="작성자명"
+                    id="edit-username"
+                    name="username"
+                    value={formData.username || ''}
+                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                    placeholder="사용자명을 입력하세요"
                   />
                 </Field>
                 <Field>
-                  <Label htmlFor="category">카테고리</Label>
-                  <Select
-                    name="category"
-                    value={formData.category || ''}
-                    onValueChange={(value) => setFormData({ ...formData, category: value })}
-                  >
-                    <SelectTrigger id="category">
-                      <SelectValue placeholder="카테고리 선택" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="development">Development</SelectItem>
-                      <SelectItem value="design">Design</SelectItem>
-                      <SelectItem value="accessibility">Accessibility</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="edit-email">
+                    이메일 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="edit-email"
+                    name="email"
+                    type="email"
+                    value={formData.email || ''}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="이메일을 입력하세요"
+                  />
                 </Field>
-              </div>
-              <Field>
-                <Label htmlFor="content">내용</Label>
-                <Textarea
-                  id="content"
-                  name="content"
-                  value={formData.content || ''}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="게시글 내용을 입력하세요"
-                  rows={6}
-                />
-              </Field>
-            </>
-          )}
-        </div>
-      </Modal>
-
-      <Modal
-        isOpen={isEditModalOpen}
-        onClose={() => {
-          setIsEditModalOpen(false);
-          setFormData({});
-          setSelectedItem(null);
-        }}
-        title={`${entityType === 'user' ? '사용자' : '게시글'} 수정`}
-        size="large"
-        showFooter
-        footerContent={
-          <>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '16px',
+                  }}
+                >
+                  <Field>
+                    <Label htmlFor="role">역할</Label>
+                    <Select
+                      name="role"
+                      value={formData.role || 'user'}
+                      onValueChange={(value) => setFormData({ ...formData, role: value })}
+                    >
+                      <SelectTrigger id="role">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="user">사용자</SelectItem>
+                        <SelectItem value="moderator">운영자</SelectItem>
+                        <SelectItem value="admin">관리자</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                  <Field>
+                    <Label htmlFor="status">상태</Label>
+                    <Select
+                      name="status"
+                      value={formData.status || 'active'}
+                      onValueChange={(value) => setFormData({ ...formData, status: value })}
+                    >
+                      <SelectTrigger id="status">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="active">활성</SelectItem>
+                        <SelectItem value="inactive">비활성</SelectItem>
+                        <SelectItem value="suspended">정지</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                </div>
+              </>
+            ) : (
+              <>
+                <Field>
+                  <Label htmlFor="title">
+                    제목 <span className="text-feedback-error">*</span>
+                  </Label>
+                  <Input
+                    id="title"
+                    name="title"
+                    value={formData.title || ''}
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    placeholder="게시글 제목을 입력하세요"
+                  />
+                </Field>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '16px',
+                  }}
+                >
+                  <Field>
+                    <Label htmlFor="author">
+                      작성자 <span className="text-feedback-error">*</span>
+                    </Label>
+                    <Input
+                      id="author"
+                      name="author"
+                      value={formData.author || ''}
+                      onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                      placeholder="작성자명"
+                    />
+                  </Field>
+                  <Field>
+                    <Label htmlFor="category">카테고리</Label>
+                    <Select
+                      name="category"
+                      value={formData.category || ''}
+                      onValueChange={(value) => setFormData({ ...formData, category: value })}
+                    >
+                      <SelectTrigger id="category">
+                        <SelectValue placeholder="카테고리 선택" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="development">Development</SelectItem>
+                        <SelectItem value="design">Design</SelectItem>
+                        <SelectItem value="accessibility">Accessibility</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                </div>
+                <Field>
+                  <Label htmlFor="content">내용</Label>
+                  <Textarea
+                    id="content"
+                    name="content"
+                    value={formData.content || ''}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                    placeholder="게시글 내용을 입력하세요"
+                    rows={6}
+                  />
+                </Field>
+              </>
+            )}
+          </div>
+          <DialogFooter>
             <Button
               variant="secondary"
               size="md"
@@ -784,153 +943,9 @@ export const ManagementPage: React.FC = () => {
             <Button variant="default" size="md" onClick={handleUpdate}>
               수정 완료
             </Button>
-          </>
-        }
-      >
-        <div className="space-y-4">
-          {selectedItem && (
-            <Alert variant="info">
-              ID: {selectedItem.id} | 생성일: {selectedItem.createdAt}
-              {entityType === 'post' && ` | 조회수: ${(selectedItem as Post).views}`}
-            </Alert>
-          )}
-
-          {entityType === 'user' ? (
-            <>
-              <Field>
-                <Label htmlFor="edit-username">
-                  사용자명 <span className="text-feedback-error">*</span>
-                </Label>
-                <Input
-                  id="edit-username"
-                  name="username"
-                  value={formData.username || ''}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  placeholder="사용자명을 입력하세요"
-                />
-              </Field>
-              <Field>
-                <Label htmlFor="edit-email">
-                  이메일 <span className="text-feedback-error">*</span>
-                </Label>
-                <Input
-                  id="edit-email"
-                  name="email"
-                  type="email"
-                  value={formData.email || ''}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="이메일을 입력하세요"
-                />
-              </Field>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '16px',
-                }}
-              >
-                <Field>
-                  <Label htmlFor="role">역할</Label>
-                  <Select
-                    name="role"
-                    value={formData.role || 'user'}
-                    onValueChange={(value) => setFormData({ ...formData, role: value })}
-                  >
-                    <SelectTrigger id="role">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="user">사용자</SelectItem>
-                      <SelectItem value="moderator">운영자</SelectItem>
-                      <SelectItem value="admin">관리자</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Field>
-                <Field>
-                  <Label htmlFor="status">상태</Label>
-                  <Select
-                    name="status"
-                    value={formData.status || 'active'}
-                    onValueChange={(value) => setFormData({ ...formData, status: value })}
-                  >
-                    <SelectTrigger id="status">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="active">활성</SelectItem>
-                      <SelectItem value="inactive">비활성</SelectItem>
-                      <SelectItem value="suspended">정지</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Field>
-              </div>
-            </>
-          ) : (
-            <>
-              <Field>
-                <Label htmlFor="title">
-                  제목 <span className="text-feedback-error">*</span>
-                </Label>
-                <Input
-                  id="title"
-                  name="title"
-                  value={formData.title || ''}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="게시글 제목을 입력하세요"
-                />
-              </Field>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '16px',
-                }}
-              >
-                <Field>
-                  <Label htmlFor="author">
-                    작성자 <span className="text-feedback-error">*</span>
-                  </Label>
-                  <Input
-                    id="author"
-                    name="author"
-                    value={formData.author || ''}
-                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-                    placeholder="작성자명"
-                  />
-                </Field>
-                <Field>
-                  <Label htmlFor="category">카테고리</Label>
-                  <Select
-                    name="category"
-                    value={formData.category || ''}
-                    onValueChange={(value) => setFormData({ ...formData, category: value })}
-                  >
-                    <SelectTrigger id="category">
-                      <SelectValue placeholder="카테고리 선택" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="development">Development</SelectItem>
-                      <SelectItem value="design">Design</SelectItem>
-                      <SelectItem value="accessibility">Accessibility</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </Field>
-              </div>
-              <Field>
-                <Label htmlFor="content">내용</Label>
-                <Textarea
-                  id="content"
-                  name="content"
-                  value={formData.content || ''}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="게시글 내용을 입력하세요"
-                  rows={6}
-                />
-              </Field>
-            </>
-          )}
-        </div>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
