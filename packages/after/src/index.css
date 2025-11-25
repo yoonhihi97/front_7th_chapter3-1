@@ -4,10 +4,86 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Typography */
-  --font-sans: Arial, sans-serif;
+  /* ==============================================
+     PRIMITIVE COLOR TOKENS
+     - @theme inline에 정의하면 bg-*, text-* 유틸리티 자동 생성
+     ============================================== */
 
-  /* Font sizes - Primitive tokens (creates text-* utility classes) */
+  /* Neutral Colors */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #eeeeee;
+  --color-neutral-300: #e0e0e0;
+  --color-neutral-400: #bdbdbd;
+  --color-neutral-500: #9e9e9e;
+  --color-neutral-600: #757575;
+  --color-neutral-700: #616161;
+  --color-neutral-800: #424242;
+  --color-neutral-900: #212121;
+  --color-neutral-950: #000000;
+
+  /* Blue - Primary Action */
+  --color-blue-50: #e3f2fd;
+  --color-blue-100: #bbdefb;
+  --color-blue-200: #90caf9;
+  --color-blue-300: #64b5f6;
+  --color-blue-400: #42a5f5;
+  --color-blue-500: #2196f3;
+  --color-blue-600: #1e88e5;
+  --color-blue-700: #1976d2;
+  --color-blue-800: #1565c0;
+  --color-blue-900: #0d47a1;
+
+  /* Green - Success */
+  --color-green-50: #e8f5e9;
+  --color-green-100: #c8e6c9;
+  --color-green-200: #a5d6a7;
+  --color-green-300: #81c784;
+  --color-green-400: #66bb6a;
+  --color-green-500: #4caf50;
+  --color-green-600: #43a047;
+  --color-green-700: #388e3c;
+  --color-green-800: #2e7d32;
+  --color-green-900: #1b5e20;
+
+  /* Orange - Warning */
+  --color-orange-50: #fff3e0;
+  --color-orange-100: #ffe0b2;
+  --color-orange-200: #ffcc80;
+  --color-orange-300: #ffb74d;
+  --color-orange-400: #ffa726;
+  --color-orange-500: #ff9800;
+  --color-orange-600: #fb8c00;
+  --color-orange-700: #f57c00;
+  --color-orange-800: #ef6c00;
+  --color-orange-900: #e65100;
+
+  /* Red - Error */
+  --color-red-50: #ffebee;
+  --color-red-100: #ffcdd2;
+  --color-red-200: #ef9a9a;
+  --color-red-300: #e57373;
+  --color-red-400: #ef5350;
+  --color-red-500: #f44336;
+  --color-red-600: #e53935;
+  --color-red-700: #d32f2f;
+  --color-red-800: #c62828;
+  --color-red-900: #b71c1c;
+
+  /* Cyan - Info */
+  --color-cyan-50: #e0f7fa;
+  --color-cyan-100: #b2ebf2;
+  --color-cyan-200: #80deea;
+  --color-cyan-300: #4dd0e1;
+  --color-cyan-400: #26c6da;
+  --color-cyan-500: #00bcd4;
+  --color-cyan-600: #00acc1;
+  --color-cyan-700: #0288d1;
+  --color-cyan-800: #0097a7;
+  --color-cyan-900: #006064;
+
+  /* Font Sizes */
   --text-2xs: 0.625rem; /* 10px */
   --text-xs: 0.75rem; /* 12px */
   --text-sm: 0.8125rem; /* 13px */
@@ -17,68 +93,17 @@
   --text-xl: 1.125rem; /* 18px */
   --text-2xl: 1.25rem; /* 20px */
   --text-3xl: 1.5rem; /* 24px */
-  --text-4xl: 1.75rem; /* 28px */
 
-  /* Border radius */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Border Radius */
+  --radius: 0.1875rem; /* 3px */
+}
 
-  /* Surface colors */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface-card: var(--surface-card);
-  --color-surface-card-foreground: var(--surface-card-foreground);
-
-  /* Action colors */
-  --color-action-primary: var(--action-primary);
-  --color-action-primary-foreground: var(--action-primary-foreground);
-  --color-action-primary-border: var(--action-primary-border);
-  --color-action-primary-hover: var(--action-primary-hover);
-  --color-action-secondary: var(--action-secondary);
-  --color-action-secondary-foreground: var(--action-secondary-foreground);
-  --color-action-secondary-border: var(--action-secondary-border);
-  --color-action-secondary-hover: var(--action-secondary-hover);
-
-  /* Feedback colors */
-  --color-feedback-success: var(--feedback-success);
-  --color-feedback-success-foreground: var(--feedback-success-foreground);
-  --color-feedback-success-border: var(--feedback-success-border);
-  --color-feedback-success-hover: var(--feedback-success-hover);
-  --color-feedback-warning: var(--feedback-warning);
-  --color-feedback-warning-foreground: var(--feedback-warning-foreground);
-  --color-feedback-info: var(--feedback-info);
-  --color-feedback-info-foreground: var(--feedback-info-foreground);
-  --color-feedback-error: var(--feedback-error);
-  --color-feedback-error-foreground: var(--feedback-error-foreground);
-  --color-feedback-error-border: var(--feedback-error-border);
-  --color-feedback-error-hover: var(--feedback-error-hover);
-
-  /* Badge colors */
-  --color-badge-secondary: var(--badge-secondary);
-  --color-badge-secondary-foreground: var(--badge-secondary-foreground);
-
-  /* Input colors */
-  --color-input: var(--input);
-  --color-input-placeholder: var(--input-placeholder);
-  --color-label: var(--label);
-  --color-text-muted: var(--text-muted);
-
-  /* Accent colors */
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  /* State colors */
-  --color-state-muted: var(--state-muted);
-  --color-state-muted-foreground: var(--state-muted-foreground);
-
-  /* Border colors */
-  --color-border-default: var(--border-default);
-  --color-border-input: var(--border-input);
-  --color-border-focus: var(--border-focus);
-
-  /* Z-index layers */
+/* ==============================================
+   SEMANTIC & COMPONENT TOKENS
+   - @theme inline 밖에 정의 (CSS 변수로만 사용)
+   ============================================== */
+:root {
+  /* Z-index System */
   --z-index-base: 0;
   --z-index-dropdown: 1000;
   --z-index-sticky: 1020;
@@ -88,141 +113,169 @@
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
 
-  /* Form control spacing - 공통 토큰 */
-  --spacing-form-control-x: 0.625rem; /* 10px - Input, Select */
-  --spacing-form-control-y: 0.5rem; /* 8px */
-  --spacing-form-control-x-focus: 0.5625rem; /* 9px - border 보정 */
-  --spacing-form-control-y-focus: 0.4375rem; /* 7px */
+  /* Semantic Text Colors */
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-tertiary: var(--color-neutral-600);
+  --color-text-inverse: var(--color-neutral-0);
 
-  /* Textarea spacing - Textarea 전용 */
-  --spacing-textarea-x: 0.875rem; /* 14px */
-  --spacing-textarea-y: 1.03125rem; /* 16.5px */
-  --spacing-textarea-x-focus: 0.8125rem; /* 13px - border 보정 */
-  --spacing-textarea-y-focus: 0.96875rem; /* 15.5px */
+  /* Semantic Background Colors */
+  --color-bg-primary: var(--color-neutral-0);
+  --color-bg-secondary: var(--color-neutral-50);
+  --color-bg-tertiary: var(--color-neutral-100);
 
-  /* Border widths */
-  --border-width-default: 1px;
-  --border-width-focus: 2px;
+  /* Semantic Border Colors */
+  --color-border-default: #ccc;
+  --color-border-subtle: #ddd;
 
-  /* Textarea specific */
-  --radius-textarea: 0.25rem; /* 4px */
-  --line-height-textarea: 1.1876;
-}
+  /* Semantic Action Colors */
+  --color-action-primary: var(--color-blue-700);
+  --color-action-primary-hover: var(--color-blue-800);
 
-:root {
-  /* Border radius */
-  --radius: 0.1875rem; /* 3px - Material Design 기본값 */
+  /* Semantic Feedback Colors */
+  --color-feedback-success: var(--color-green-700);
+  --color-feedback-warning: var(--color-orange-700);
+  --color-feedback-error: var(--color-red-700);
+  --color-feedback-info: var(--color-cyan-700);
 
-  /* Surface colors */
-  --background: #ffffff;
-  --foreground: #333;
-  --surface-card: #ffffff;
-  --surface-card-foreground: #333;
+  /* Badge Component Tokens */
+  --badge-primary-bg: var(--color-blue-700);
+  --badge-primary-fg: var(--color-neutral-0);
+  --badge-secondary-bg: var(--color-neutral-600);
+  --badge-secondary-fg: var(--color-neutral-0);
+  --badge-success-bg: var(--color-green-700);
+  --badge-success-fg: var(--color-neutral-0);
+  --badge-warning-bg: var(--color-orange-700);
+  --badge-warning-fg: var(--color-neutral-0);
+  --badge-error-bg: var(--color-red-700);
+  --badge-error-fg: var(--color-neutral-0);
+  --badge-info-bg: var(--color-cyan-700);
+  --badge-info-fg: var(--color-neutral-0);
 
-  /* Action colors - 사용자 액션을 유도하는 색상 */
-  --action-primary: #1976d2;
-  --action-primary-foreground: #fff;
-  --action-primary-border: #1565c0;
-  --action-primary-hover: #1565c0;
-  --action-secondary: #f5f5f5;
-  --action-secondary-foreground: #333;
-  --action-secondary-border: #ddd;
-  --action-secondary-hover: #e0e0e0;
+  /* Button Component Tokens */
+  --button-primary-bg: var(--color-blue-700);
+  --button-primary-fg: var(--color-neutral-0);
+  --button-primary-border: var(--color-blue-800);
+  --button-primary-hover: var(--color-blue-800);
 
-  /* Badge colors */
-  --badge-secondary: #757575;
-  --badge-secondary-foreground: #fff;
+  --button-secondary-bg: var(--color-neutral-100);
+  --button-secondary-fg: #333;
+  --button-secondary-border: #ccc;
+  --button-secondary-hover: var(--color-neutral-300);
 
-  /* Input colors */
-  --input: #000;
+  --button-success-bg: var(--color-green-700);
+  --button-success-fg: var(--color-neutral-0);
+  --button-success-border: var(--color-green-800);
+  --button-success-hover: var(--color-green-800);
+
+  --button-error-bg: var(--color-red-700);
+  --button-error-fg: var(--color-neutral-0);
+  --button-error-border: var(--color-red-800);
+  --button-error-hover: var(--color-red-800);
+
+  /* Table Component Tokens */
+  --table-bg: var(--color-neutral-0);
+  --table-border: rgba(0, 0, 0, 0.08);
+  --table-border-strong: rgba(0, 0, 0, 0.12);
+  --table-header-bg: var(--color-neutral-50);
+  --table-header-fg: rgba(0, 0, 0, 0.6);
+  --table-cell-fg: rgba(0, 0, 0, 0.87);
+  --table-row-hover-bg: rgba(0, 0, 0, 0.04);
+  --table-stripe-bg: var(--color-neutral-50);
+
+  /* Input Component Tokens */
+  --input-bg: var(--color-neutral-0);
+  --input-fg: #000;
+  --input-border: #ccc;
+  --input-border-focus: var(--color-blue-700);
   --input-placeholder: #999;
-  --label: #333;
-  --text-muted: #666;
+  --input-disabled-bg: var(--color-neutral-100);
+  --input-label: #333;
+  --input-helper-text: #666;
 
-  /* Accent colors - hover/focus states */
-  --accent: #f5f5f5;
-  --accent-foreground: #333;
+  /* Card Component Tokens */
+  --card-bg: var(--color-neutral-0);
+  --card-border: rgba(0, 0, 0, 0.12);
+  --card-header-bg: var(--color-neutral-50);
 
-  /* Feedback colors - 시스템 피드백 색상 */
-  --feedback-success: #388e3c;
-  --feedback-success-foreground: #fff;
-  --feedback-success-border: #2e7d32;
-  --feedback-success-hover: #2e7d32;
-  --feedback-warning: #f57c00;
-  --feedback-warning-foreground: #fff;
-  --feedback-info: #0288d1;
-  --feedback-info-foreground: #fff;
-  --feedback-error: #d32f2f;
-  --feedback-error-foreground: #fff;
-  --feedback-error-border: #c62828;
-  --feedback-error-hover: #c62828;
-
-  /* State colors - UI 상태 표시 */
-  --state-muted: #f5f5f5;
-  --state-muted-foreground: #666;
-
-  /* Border colors */
-  --border-default: #ccc;
-  --border-input: #ccc;
-  --border-focus: #1976d2;
+  /* Typography */
+  --font-family-sans: Arial, sans-serif;
 }
 
+/* ==============================================
+   DARK MODE
+   ============================================== */
 .dark {
-  /* Surface colors */
-  --background: #212121;
-  --foreground: #fafafa;
-  --surface-card: #2e2e2e;
-  --surface-card-foreground: #fafafa;
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-tertiary: var(--color-neutral-400);
+  --color-text-inverse: var(--color-neutral-900);
 
-  /* Action colors */
-  --action-primary: #42a5f5;
-  --action-primary-foreground: #212121;
-  --action-primary-border: #1e88e5;
-  --action-primary-hover: #1e88e5;
-  --action-secondary: #424242;
-  --action-secondary-foreground: #fafafa;
-  --action-secondary-border: #616161;
-  --action-secondary-hover: #616161;
+  --color-bg-primary: var(--color-neutral-900);
+  --color-bg-secondary: var(--color-neutral-800);
+  --color-bg-tertiary: var(--color-neutral-700);
 
-  /* Input colors */
-  --input: #fafafa;
-  --input-placeholder: #888;
-  --label: #e0e0e0;
-  --text-muted: #aaa;
+  --color-border-default: rgba(255, 255, 255, 0.1);
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
 
-  /* Accent colors - hover/focus states */
-  --accent: #424242;
-  --accent-foreground: #fafafa;
+  --color-action-primary: var(--color-blue-400);
+  --color-action-primary-hover: var(--color-blue-300);
 
-  /* Feedback colors */
-  --feedback-success: #66bb6a;
-  --feedback-success-foreground: #212121;
-  --feedback-success-border: #43a047;
-  --feedback-success-hover: #43a047;
-  --feedback-warning: #ffa726;
-  --feedback-warning-foreground: #212121;
-  --feedback-info: #29b6f6;
-  --feedback-info-foreground: #212121;
-  --feedback-error: #ef5350;
-  --feedback-error-foreground: #fafafa;
-  --feedback-error-border: #e53935;
-  --feedback-error-hover: #e53935;
+  --color-feedback-success: var(--color-green-400);
+  --color-feedback-warning: var(--color-orange-400);
+  --color-feedback-error: var(--color-red-400);
+  --color-feedback-info: var(--color-cyan-400);
 
-  /* State colors */
-  --state-muted: #424242;
-  --state-muted-foreground: #bdbdbd;
+  --badge-primary-bg: var(--color-blue-400);
+  --badge-primary-fg: var(--color-neutral-900);
+  --badge-secondary-bg: var(--color-neutral-600);
+  --badge-success-bg: var(--color-green-400);
+  --badge-success-fg: var(--color-neutral-900);
+  --badge-warning-bg: var(--color-orange-400);
+  --badge-warning-fg: var(--color-neutral-900);
+  --badge-error-bg: var(--color-red-400);
+  --badge-error-fg: var(--color-neutral-900);
+  --badge-info-bg: var(--color-cyan-400);
+  --badge-info-fg: var(--color-neutral-900);
 
-  /* Border colors */
-  --border-default: rgba(255, 255, 255, 0.1);
-  --border-input: rgba(255, 255, 255, 0.15);
-  --border-focus: #42a5f5;
+  --button-primary-bg: var(--color-blue-400);
+  --button-primary-fg: var(--color-neutral-900);
+  --button-primary-border: var(--color-blue-300);
+  --button-primary-hover: var(--color-blue-300);
+  --button-secondary-bg: var(--color-neutral-700);
+  --button-secondary-fg: var(--color-neutral-50);
+  --button-secondary-hover: var(--color-neutral-600);
+
+  --table-bg: var(--color-neutral-900);
+  --table-border: rgba(255, 255, 255, 0.08);
+  --table-border-strong: rgba(255, 255, 255, 0.12);
+  --table-header-bg: var(--color-neutral-800);
+  --table-header-fg: rgba(255, 255, 255, 0.6);
+  --table-cell-fg: rgba(255, 255, 255, 0.87);
+  --table-row-hover-bg: rgba(255, 255, 255, 0.04);
+  --table-stripe-bg: var(--color-neutral-800);
+
+  --input-bg: var(--color-neutral-900);
+  --input-fg: var(--color-neutral-50);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-border-focus: var(--color-blue-400);
+  --input-label: var(--color-neutral-300);
+  --input-helper-text: var(--color-neutral-400);
+
+  --card-bg: var(--color-neutral-900);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --card-header-bg: var(--color-neutral-800);
 }
 
 @layer base {
   * {
-    @apply border-border-default outline-border-focus/50;
+    @apply outline-none;
+    border-color: var(--color-border-default);
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-sans);
   }
 }
