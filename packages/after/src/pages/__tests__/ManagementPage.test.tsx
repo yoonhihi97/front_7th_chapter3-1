@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ManagementPage } from '../ManagementPage';
 
@@ -20,18 +20,27 @@ describe('ManagementPage - User Management', () => {
     const createButton = screen.getByRole('button', { name: '새로 만들기' });
     await user.click(createButton);
 
-    // name으로 input과 select 직접 찾기
+    // name으로 input 찾기
     await waitFor(() => {
       expect(document.querySelector('input[name="username"]')).toBeInTheDocument();
     });
 
     const usernameInput = document.querySelector('input[name="username"]') as HTMLInputElement;
     const emailInput = document.querySelector('input[name="email"]') as HTMLInputElement;
-    const roleSelect = document.querySelector('select[name="role"]') as HTMLSelectElement;
 
     await user.type(usernameInput, 'testuser');
     await user.type(emailInput, 'test@example.com');
-    await user.selectOptions(roleSelect, 'user');
+
+    // shadcn Select 컴포넌트와 상호작용
+    // 1. role Select 트리거 찾기 (id="role"인 버튼)
+    const roleSelectTrigger = screen.getByRole('combobox', { name: /역할/i });
+
+    // 2. Select 열기 (pointerDown 이벤트 사용)
+    fireEvent.pointerDown(roleSelectTrigger);
+
+    // 3. 옵션이 나타날 때까지 대기 후 선택
+    const userOption = await screen.findByRole('option', { name: '사용자' });
+    await user.click(userOption);
 
     const createBtn = screen.getByRole('button', { name: '생성' });
     await user.click(createBtn);
