@@ -14,8 +14,15 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
+  Badge,
+  Table,
+  TableHeader,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
 } from '../components/ui';
-import { Alert, Table, Modal } from '../components/organisms';
+import { Alert, Modal } from '../components/organisms';
 import { userService } from '../services/userService';
 import { postService } from '../services/postService';
 import type { User } from '../services/userService';
@@ -235,31 +242,62 @@ export const ManagementPage: React.FC = () => {
     }
   };
 
-  // 🚨 Table 컴포넌트에 로직을 위임하여 간소화
-  const renderTableColumns = () => {
-    if (entityType === 'user') {
-      return [
-        { key: 'id', header: 'ID', width: '60px' },
-        { key: 'username', header: '사용자명', width: '150px' },
-        { key: 'email', header: '이메일' },
-        { key: 'role', header: '역할', width: '120px' },
-        { key: 'status', header: '상태', width: '120px' },
-        { key: 'createdAt', header: '생성일', width: '120px' },
-        { key: 'lastLogin', header: '마지막 로그인', width: '140px' },
-        { key: 'actions', header: '관리', width: '200px' },
-      ];
-    } else {
-      return [
-        { key: 'id', header: 'ID', width: '60px' },
-        { key: 'title', header: '제목' },
-        { key: 'author', header: '작성자', width: '120px' },
-        { key: 'category', header: '카테고리', width: '140px' },
-        { key: 'status', header: '상태', width: '120px' },
-        { key: 'views', header: '조회수', width: '100px' },
-        { key: 'createdAt', header: '작성일', width: '120px' },
-        { key: 'actions', header: '관리', width: '250px' },
-      ];
-    }
+  // Helper functions for Badge mapping
+  const getRoleVariant = (role: string): 'primary' | 'secondary' | 'destructive' | 'warning' => {
+    const map: Record<string, 'primary' | 'secondary' | 'destructive' | 'warning'> = {
+      admin: 'destructive',
+      moderator: 'warning',
+      user: 'primary',
+      guest: 'secondary',
+    };
+    return map[role] || 'primary';
+  };
+
+  const getRoleLabel = (role: string) => {
+    const labels: Record<string, string> = {
+      admin: '관리자',
+      moderator: '운영자',
+      user: '사용자',
+      guest: '게스트',
+    };
+    return labels[role] || role;
+  };
+
+  const getStatusVariant = (status: string): 'success' | 'warning' | 'secondary' | 'info' | 'destructive' => {
+    const map: Record<string, 'success' | 'warning' | 'secondary' | 'info' | 'destructive'> = {
+      published: 'success',
+      active: 'success',
+      draft: 'warning',
+      inactive: 'warning',
+      archived: 'secondary',
+      pending: 'info',
+      rejected: 'destructive',
+      suspended: 'destructive',
+    };
+    return map[status] || 'secondary';
+  };
+
+  const getStatusLabel = (status: string) => {
+    const labels: Record<string, string> = {
+      published: '게시됨',
+      draft: '임시저장',
+      archived: '보관됨',
+      pending: '대기중',
+      rejected: '거부됨',
+      active: '활성',
+      inactive: '비활성',
+      suspended: '정지',
+    };
+    return labels[status] || status;
+  };
+
+  const getCategoryVariant = (category: string): 'primary' | 'info' | 'destructive' | 'secondary' => {
+    const map: Record<string, 'primary' | 'info' | 'destructive' | 'secondary'> = {
+      development: 'primary',
+      design: 'info',
+      accessibility: 'destructive',
+    };
+    return map[category] || 'secondary';
   };
 
   const stats = getStats();
@@ -425,18 +463,131 @@ export const ManagementPage: React.FC = () => {
                 overflow: 'auto',
               }}
             >
-              <Table
-                columns={renderTableColumns()}
-                data={data}
-                striped
-                hover
-                entityType={entityType}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                onPublish={(id) => handleStatusAction(id, 'publish')}
-                onArchive={(id) => handleStatusAction(id, 'archive')}
-                onRestore={(id) => handleStatusAction(id, 'restore')}
-              />
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    {entityType === 'user' ? (
+                      <>
+                        <TableHead style={{ width: '60px' }}>ID</TableHead>
+                        <TableHead style={{ width: '150px' }}>사용자명</TableHead>
+                        <TableHead>이메일</TableHead>
+                        <TableHead style={{ width: '120px' }}>역할</TableHead>
+                        <TableHead style={{ width: '120px' }}>상태</TableHead>
+                        <TableHead style={{ width: '120px' }}>생성일</TableHead>
+                        <TableHead style={{ width: '140px' }}>마지막 로그인</TableHead>
+                        <TableHead style={{ width: '200px' }}>관리</TableHead>
+                      </>
+                    ) : (
+                      <>
+                        <TableHead style={{ width: '60px' }}>ID</TableHead>
+                        <TableHead>제목</TableHead>
+                        <TableHead style={{ width: '120px' }}>작성자</TableHead>
+                        <TableHead style={{ width: '140px' }}>카테고리</TableHead>
+                        <TableHead style={{ width: '120px' }}>상태</TableHead>
+                        <TableHead style={{ width: '100px' }}>조회수</TableHead>
+                        <TableHead style={{ width: '120px' }}>작성일</TableHead>
+                        <TableHead style={{ width: '250px' }}>관리</TableHead>
+                      </>
+                    )}
+                  </TableRow>
+                </TableHeader>
+                <TableBody striped>
+                  {entityType === 'user'
+                    ? (data as User[]).map((user) => (
+                        <TableRow key={user.id}>
+                          <TableCell>{user.id}</TableCell>
+                          <TableCell>{user.username}</TableCell>
+                          <TableCell>{user.email}</TableCell>
+                          <TableCell>
+                            <Badge variant={getRoleVariant(user.role)}>
+                              {getRoleLabel(user.role)}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={getStatusVariant(user.status)}>
+                              {getStatusLabel(user.status)}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{user.createdAt}</TableCell>
+                          <TableCell>{user.lastLogin || '-'}</TableCell>
+                          <TableCell>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <Button size="sm" variant="default" onClick={() => handleEdit(user)}>
+                                수정
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => handleDelete(user.id)}
+                              >
+                                삭제
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    : (data as Post[]).map((post) => (
+                        <TableRow key={post.id}>
+                          <TableCell>{post.id}</TableCell>
+                          <TableCell>{post.title}</TableCell>
+                          <TableCell>{post.author}</TableCell>
+                          <TableCell>
+                            <Badge variant={getCategoryVariant(post.category)} pill>
+                              {post.category}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={getStatusVariant(post.status)}>
+                              {getStatusLabel(post.status)}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{post.views.toLocaleString()}</TableCell>
+                          <TableCell>{post.createdAt}</TableCell>
+                          <TableCell>
+                            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                              <Button size="sm" variant="default" onClick={() => handleEdit(post)}>
+                                수정
+                              </Button>
+                              {post.status === 'draft' && (
+                                <Button
+                                  size="sm"
+                                  variant="success"
+                                  onClick={() => handleStatusAction(post.id, 'publish')}
+                                >
+                                  게시
+                                </Button>
+                              )}
+                              {post.status === 'published' && (
+                                <Button
+                                  size="sm"
+                                  variant="secondary"
+                                  onClick={() => handleStatusAction(post.id, 'archive')}
+                                >
+                                  보관
+                                </Button>
+                              )}
+                              {post.status === 'archived' && (
+                                <Button
+                                  size="sm"
+                                  variant="default"
+                                  onClick={() => handleStatusAction(post.id, 'restore')}
+                                >
+                                  복원
+                                </Button>
+                              )}
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => handleDelete(post.id)}
+                              >
+                                삭제
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                </TableBody>
+              </Table>
             </div>
           </div>
         </div>
