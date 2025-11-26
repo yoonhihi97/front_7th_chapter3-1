@@ -48,6 +48,5 @@ export {
   DialogTitle,
   DialogTrigger,
 } from './dialog';
-export { Alert, AlertTitle, AlertDescription } from './alert';
 export { Header } from './header';
-export { Toaster } from './sonner';
+export { Toaster } from './toast';
