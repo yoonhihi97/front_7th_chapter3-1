@@ -6,7 +6,9 @@ import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
   [
-    'inline-block',
+    'inline-flex',
+    'items-center',
+    'gap-2',
     'font-sans',
     'font-normal',
     'leading-[1.5]',
