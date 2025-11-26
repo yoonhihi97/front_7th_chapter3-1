@@ -50,3 +50,4 @@ export {
 } from './dialog';
 export { Header } from './header';
 export { Toaster } from './toast';
+export { ThemeToggle } from './theme-toggle';
