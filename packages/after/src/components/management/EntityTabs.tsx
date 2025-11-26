@@ -12,15 +12,15 @@ const tabButtonVariants = cva(
     'text-sm',
     'font-medium',
     'border',
-    'border-neutral-400',
+    'border-(--color-border-default)',
     'rounded-sm',
     'transition-colors',
   ],
   {
     variants: {
       active: {
-        true: ['bg-blue-700', 'text-white'],
-        false: ['bg-neutral-100', 'text-neutral-800', 'hover:bg-neutral-200'],
+        true: ['bg-(--button-primary-bg)', 'text-(--button-primary-fg)'],
+        false: ['bg-(--button-secondary-bg)', 'text-(--button-secondary-fg)', 'hover:bg-(--button-secondary-hover)'],
       },
     },
     defaultVariants: {
@@ -58,7 +58,7 @@ interface EntityTabsProps {
  */
 export const EntityTabs: React.FC<EntityTabsProps> = ({ activeTab, onTabChange }) => {
   return (
-    <div className="mb-4 border-b-2 border-neutral-300 pb-1">
+    <div className="mb-4 border-b-2 border-(--color-border-default) pb-1">
       <TabButton active={activeTab === 'post'} onClick={() => onTabChange('post')}>
         게시글
       </TabButton>

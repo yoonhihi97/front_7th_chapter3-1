@@ -62,16 +62,16 @@ export const ManagementPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-100">
+    <div className="min-h-screen bg-(--color-bg-secondary)">
       <div className="mx-auto max-w-7xl p-5">
         {/* 페이지 헤더 */}
         <div className="mb-5">
-          <h1 className="mb-1 text-2xl font-bold text-neutral-800">관리 시스템</h1>
-          <p className="text-sm text-neutral-600">사용자와 게시글을 관리하세요</p>
+          <h1 className="mb-1 text-2xl font-bold text-(--color-text-primary)">관리 시스템</h1>
+          <p className="text-sm text-(--color-text-secondary)">사용자와 게시글을 관리하세요</p>
         </div>
 
         {/* 메인 컨텐츠 */}
-        <div className="border border-neutral-300 bg-white p-4">
+        <div className="border border-(--card-border) bg-(--card-bg) p-4">
           {/* 탭 */}
           <EntityTabs activeTab={entityType} onTabChange={setEntityType} />
 
@@ -86,7 +86,7 @@ export const ManagementPage: React.FC = () => {
           <StatsCards stats={stats} />
 
           {/* 테이블 */}
-          <div className="overflow-auto border border-neutral-300 bg-white">
+          <div className="overflow-auto border border-(--table-border) bg-(--table-bg)">
             <EntityTable
               entityType={entityType}
               data={data}

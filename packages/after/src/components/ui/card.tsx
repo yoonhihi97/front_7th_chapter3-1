@@ -12,11 +12,11 @@ const cardVariants = cva(
         false: "",
       },
       stat: {
-        info: "bg-blue-50 border border-blue-300 rounded-[var(--radius)] shadow-none gap-0 py-0",
-        success: "bg-green-50 border border-green-400 rounded-[var(--radius)] shadow-none gap-0 py-0",
-        warning: "bg-orange-50 border border-orange-300 rounded-[var(--radius)] shadow-none gap-0 py-0",
-        error: "bg-red-50 border border-red-300 rounded-[var(--radius)] shadow-none gap-0 py-0",
-        neutral: "bg-gray-100 border border-gray-400 rounded-[var(--radius)] shadow-none gap-0 py-0",
+        info: "bg-(--card-bg) border border-(--card-border) rounded-[var(--radius)] shadow-none gap-0 py-0",
+        success: "bg-(--card-bg) border border-(--card-border) rounded-[var(--radius)] shadow-none gap-0 py-0",
+        warning: "bg-(--card-bg) border border-(--card-border) rounded-[var(--radius)] shadow-none gap-0 py-0",
+        error: "bg-(--card-bg) border border-(--card-border) rounded-[var(--radius)] shadow-none gap-0 py-0",
+        neutral: "bg-(--card-bg) border border-(--card-border) rounded-[var(--radius)] shadow-none gap-0 py-0",
       },
     },
     defaultVariants: {

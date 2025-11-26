@@ -9,11 +9,11 @@ import type { StatItem } from '../../hooks/useEntityStats';
 const statValueVariants = cva('text-2xl font-bold', {
   variants: {
     variant: {
-      info: 'text-blue-600',
-      success: 'text-green-700',
-      warning: 'text-orange-600',
-      error: 'text-red-600',
-      neutral: 'text-gray-700',
+      info: 'text-(--color-feedback-info)',
+      success: 'text-(--color-feedback-success)',
+      warning: 'text-(--color-feedback-warning)',
+      error: 'text-(--color-feedback-error)',
+      neutral: 'text-(--color-text-primary)',
     },
   },
 });
@@ -29,7 +29,7 @@ const StatCard: React.FC<StatCardProps> = ({ stat }) => {
   return (
     <Card stat={stat.variant}>
       <CardHeader className="px-[15px] py-0 pt-3 pb-1">
-        <CardTitle className="text-xs font-normal text-gray-600">{stat.label}</CardTitle>
+        <CardTitle className="text-xs font-normal text-(--color-text-secondary)">{stat.label}</CardTitle>
       </CardHeader>
       <CardContent className="px-[15px] py-0 pb-3">
         <div className={statValueVariants({ variant: stat.variant })}>{stat.value.toLocaleString()}</div>
