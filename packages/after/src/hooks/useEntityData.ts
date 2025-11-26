@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { userService, type User } from '../services/userService';
 import { postService, type Post } from '../services/postService';
-import { useAlert } from '../contexts/AlertContext';
 import { messageFactory } from '../utils/messageFactory';
 import type { EntityType, Entity, UserFormData, PostFormData } from '../types/forms';
 
@@ -16,7 +16,6 @@ import type { EntityType, Entity, UserFormData, PostFormData } from '../types/fo
 export const useEntityData = (entityType: EntityType) => {
   const [data, setData] = useState<Entity[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { alert } = useAlert();
 
   /**
    * 데이터 로드
@@ -35,7 +34,7 @@ export const useEntityData = (entityType: EntityType) => {
       setData(result);
     } catch (error) {
       const message = error instanceof Error ? error.message : messageFactory.error('load');
-      alert.error(message);
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -66,10 +65,10 @@ export const useEntityData = (entityType: EntityType) => {
       }
 
       await loadData();
-      alert.success(messageFactory.success('create', entityType));
+      toast.success(messageFactory.success('create', entityType));
     } catch (error) {
       const message = error instanceof Error ? error.message : messageFactory.error('create');
-      alert.error(message);
+      toast.error(message);
       throw error;
     }
   };
@@ -86,10 +85,10 @@ export const useEntityData = (entityType: EntityType) => {
       }
 
       await loadData();
-      alert.success(messageFactory.success('update', entityType));
+      toast.success(messageFactory.success('update', entityType));
     } catch (error) {
       const message = error instanceof Error ? error.message : messageFactory.error('update');
-      alert.error(message);
+      toast.error(message);
       throw error;
     }
   };
@@ -108,10 +107,10 @@ export const useEntityData = (entityType: EntityType) => {
       }
 
       await loadData();
-      alert.success(messageFactory.success('delete', entityType));
+      toast.success(messageFactory.success('delete', entityType));
     } catch (error) {
       const message = error instanceof Error ? error.message : messageFactory.error('delete');
-      alert.error(message);
+      toast.error(message);
     }
   };
 
@@ -131,10 +130,10 @@ export const useEntityData = (entityType: EntityType) => {
       }
 
       await loadData();
-      alert.success(messageFactory.postStatus.success(action));
+      toast.success(messageFactory.postStatus.success(action));
     } catch (error) {
       const message = error instanceof Error ? error.message : messageFactory.postStatus.error(action);
-      alert.error(message);
+      toast.error(message);
     }
   };
 
