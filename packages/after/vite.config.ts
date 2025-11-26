@@ -6,7 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/front_7th_chapter3-1/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -19,4 +20,4 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     css: true,
   },
-});
+}));

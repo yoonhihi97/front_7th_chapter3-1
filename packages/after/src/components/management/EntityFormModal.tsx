@@ -177,7 +177,7 @@ export const EntityFormModal: React.FC<EntityFormModalProps> = ({
             <Button type="button" variant="outline" onClick={onClose}>
               취소
             </Button>
-            <Button type="submit">{mode === 'create' ? '생성' : '저장'}</Button>
+            <Button type="submit">{mode === 'create' ? '생성' : '수정 완료'}</Button>
           </DialogFooter>
         </form>
       </DialogContent>
@@ -209,6 +209,7 @@ const UserFormFields: React.FC<UserFormFieldsProps> = ({ formData, onFieldChange
         <Label htmlFor="username">사용자명</Label>
         <Input
           id="username"
+          name="username"
           value={formData.username}
           onChange={(e) => onFieldChange('username', e.target.value)}
           placeholder="사용자명을 입력하세요"
@@ -220,6 +221,7 @@ const UserFormFields: React.FC<UserFormFieldsProps> = ({ formData, onFieldChange
         <Label htmlFor="email">이메일</Label>
         <Input
           id="email"
+          name="email"
           type="email"
           value={formData.email}
           onChange={(e) => onFieldChange('email', e.target.value)}
@@ -231,7 +233,7 @@ const UserFormFields: React.FC<UserFormFieldsProps> = ({ formData, onFieldChange
       <div className="space-y-2">
         <Label htmlFor="role">역할</Label>
         <Select value={formData.role} onValueChange={(value) => onFieldChange('role', value)}>
-          <SelectTrigger>
+          <SelectTrigger aria-label="역할">
             <SelectValue placeholder="역할 선택" />
           </SelectTrigger>
           <SelectContent>
@@ -246,7 +248,7 @@ const UserFormFields: React.FC<UserFormFieldsProps> = ({ formData, onFieldChange
       <div className="space-y-2">
         <Label htmlFor="status">상태</Label>
         <Select value={formData.status} onValueChange={(value) => onFieldChange('status', value)}>
-          <SelectTrigger>
+          <SelectTrigger aria-label="상태">
             <SelectValue placeholder="상태 선택" />
           </SelectTrigger>
           <SelectContent>

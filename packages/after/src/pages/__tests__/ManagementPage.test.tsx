@@ -38,12 +38,19 @@ describe('ManagementPage - User Management', () => {
     // 2. Select 열기 (pointerDown 이벤트 사용)
     fireEvent.pointerDown(roleSelectTrigger);
 
-    // 3. 옵션이 나타날 때까지 대기 후 선택
-    const userOption = await screen.findByRole('option', { name: '사용자' });
-    await user.click(userOption);
+    // 3. 옵션이 나타날 때까지 대기 후 선택 (기본값 'user'와 다른 값 선택)
+    const adminOption = await screen.findByRole('option', { name: '관리자' });
+    await user.click(adminOption);
 
+    // Select 닫힘 대기 후 생성 버튼 클릭
+    await waitFor(() => {
+      expect(screen.queryByRole('option', { name: '관리자' })).not.toBeInTheDocument();
+    });
+
+    // userEvent.click()이 form submit을 트리거하지 않는 문제가 있어 fireEvent 사용
+    // https://github.com/testing-library/user-event/issues/1032
     const createBtn = screen.getByRole('button', { name: '생성' });
-    await user.click(createBtn);
+    fireEvent.click(createBtn);
 
     // 생성 확인
     await waitFor(() => {
@@ -64,8 +71,9 @@ describe('ManagementPage - User Management', () => {
     await user.clear(emailInputEdit);
     await user.type(emailInputEdit, 'updated@example.com');
 
+    // form submit을 위해 fireEvent 사용
     const updateBtn = screen.getByRole('button', { name: '수정 완료' });
-    await user.click(updateBtn);
+    fireEvent.click(updateBtn);
 
     // 수정 확인
     await waitFor(() => {
