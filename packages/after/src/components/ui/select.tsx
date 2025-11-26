@@ -142,8 +142,8 @@ function SelectItem({
       className={cn(
         "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none",
         "transition-colors",
-        "hover:bg-neutral-100 hover:text-(--color-text-primary)",
-        "focus:bg-neutral-100 focus:text-(--color-text-primary)",
+        "hover:bg-(--button-secondary-hover) hover:text-(--color-text-primary)",
+        "focus:bg-(--button-secondary-hover) focus:text-(--color-text-primary)",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
         className
       )}

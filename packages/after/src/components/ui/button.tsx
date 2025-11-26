@@ -50,12 +50,12 @@ const buttonVariants = cva(
           'border-(--color-border-default)',
           'bg-transparent',
           'text-(--color-text-primary)',
-          'hover:bg-neutral-100',
+          'hover:bg-(--button-secondary-hover)',
         ],
         ghost: [
           'bg-transparent',
           'text-(--color-text-primary)',
-          'hover:bg-neutral-100',
+          'hover:bg-(--button-secondary-hover)',
         ],
         link: [
           'bg-transparent',

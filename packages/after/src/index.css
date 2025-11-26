@@ -244,7 +244,16 @@
   --button-primary-hover: var(--color-blue-300);
   --button-secondary-bg: var(--color-neutral-700);
   --button-secondary-fg: var(--color-neutral-50);
+  --button-secondary-border: rgba(255, 255, 255, 0.1);
   --button-secondary-hover: var(--color-neutral-600);
+  --button-success-bg: var(--color-green-400);
+  --button-success-fg: var(--color-neutral-900);
+  --button-success-border: var(--color-green-300);
+  --button-success-hover: var(--color-green-300);
+  --button-error-bg: var(--color-red-400);
+  --button-error-fg: var(--color-neutral-900);
+  --button-error-border: var(--color-red-300);
+  --button-error-hover: var(--color-red-300);
 
   --table-bg: var(--color-neutral-900);
   --table-border: rgba(255, 255, 255, 0.08);
