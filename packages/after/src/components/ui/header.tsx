@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "./theme-toggle"
 
 function Header({ className, ...props }: React.ComponentProps<"header">) {
   return (
@@ -32,6 +33,7 @@ function Header({ className, ...props }: React.ComponentProps<"header">) {
 
         {/* User Info */}
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <div className="text-right">
             <div className="text-sm font-semibold text-(--color-text-primary)">
               Demo User
@@ -40,7 +42,7 @@ function Header({ className, ...props }: React.ComponentProps<"header">) {
               demo@example.com
             </div>
           </div>
-          <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-semibold text-base">
+          <div className="w-10 h-10 rounded-full bg-(--button-secondary-bg) flex items-center justify-center text-(--button-secondary-fg) font-semibold text-base">
             DU
           </div>
         </div>
