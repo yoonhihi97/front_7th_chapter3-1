@@ -102,7 +102,7 @@ export const useEntityStats = (data: Entity[], entityType: EntityType): StatItem
     {
       id: 'total-views',
       label: '총 조회수',
-      value: posts.reduce((sum, p) => sum + p.views, 0),
+      value: posts.reduce((sum, p) => sum + (p.views ?? 0), 0),
       variant: 'neutral',
     },
   ];

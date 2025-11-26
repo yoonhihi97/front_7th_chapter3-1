@@ -42,7 +42,7 @@ export const postService = {
     const posts = getPosts();
 
     if (postData.title.length < 5) {
-      throw new Error('Title must be at least 5 characters');
+      throw new Error('제목은 5자 이상이어야 합니다');
     }
 
     const newPost: Post = {
