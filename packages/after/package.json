@@ -13,7 +13,8 @@
     "test:run": "vitest run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "pnpm build && gh-pages -d dist"
+    "deploy": "pnpm build && gh-pages -d dist",
+    "deploy-storybook": "storybook build && gh-pages -d storybook-static -e storybook"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
