@@ -18,7 +18,7 @@ function Header({ className, ...props }: React.ComponentProps<"header">) {
       <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+          <div className="w-10 h-10 bg-(--button-primary-bg) rounded-lg flex items-center justify-center text-(--button-primary-fg) font-bold text-xl">
             L
           </div>
           <div>

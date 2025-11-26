@@ -17,10 +17,10 @@ const Toaster = ({ ...props }: ToasterProps) => {
         classNames: {
           toast:
             'flex items-center gap-3 w-full rounded-[var(--radius)] border px-4 py-3 text-sm shadow-lg font-[family-name:var(--font-family-sans)]',
-          success: 'bg-green-50 text-green-900 border-green-700',
-          error: 'bg-red-50 text-red-900 border-red-700',
-          info: 'bg-cyan-50 text-cyan-900 border-cyan-700',
-          warning: 'bg-orange-50 text-orange-900 border-orange-700',
+          success: 'bg-(--toast-success-bg) text-(--toast-success-fg) border-(--toast-success-border)',
+          error: 'bg-(--toast-error-bg) text-(--toast-error-fg) border-(--toast-error-border)',
+          info: 'bg-(--toast-info-bg) text-(--toast-info-fg) border-(--toast-info-border)',
+          warning: 'bg-(--toast-warning-bg) text-(--toast-warning-fg) border-(--toast-warning-border)',
           title: 'font-medium',
           description: 'text-sm opacity-90',
         },
